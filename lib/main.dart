@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'welcome_screen.dart';
 
 void main() {
-  //hämtar listan från API varje gång appen startas
 
   runApp(
     MyApp(),
