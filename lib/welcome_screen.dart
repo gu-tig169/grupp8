@@ -10,7 +10,7 @@ class WelcomeScreen extends StatelessWidget {
 
   Widget background() {
     return
-        //Image(image: AssetImage('assets/images/framsida.png'));
-        Text("Hej!");
+        Image(image: AssetImage('assets/images/framsida.png'));
+        
   }
 }
