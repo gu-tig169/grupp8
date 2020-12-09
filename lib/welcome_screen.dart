@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'login_screen.dart';
 
 class WelcomeScreen extends StatelessWidget {
   @override
@@ -23,7 +24,7 @@ class WelcomeScreen extends StatelessWidget {
           mainAxisSize: MainAxisSize.max,
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
-            logInButton(),
+            logInButton(context),
             registerButton(),
           ],
         ),
@@ -31,7 +32,7 @@ class WelcomeScreen extends StatelessWidget {
     );
   }
 
-  Widget logInButton() {
+  Widget logInButton(context) {
     return Padding(
       padding: EdgeInsets.only(
         bottom: 15,
@@ -41,6 +42,10 @@ class WelcomeScreen extends StatelessWidget {
         child: IconButton(
             icon: Image.asset("assets/images/logInButton.png"),
             onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => (LoginScreen())),
+              );
             }),
       ),
     );
@@ -53,8 +58,7 @@ class WelcomeScreen extends StatelessWidget {
         scale: 6,
         child: IconButton(
             icon: Image.asset("assets/images/registerButton.png"),
-            onPressed: () {
-            }),
+            onPressed: () {}),
       ),
     );
   }
