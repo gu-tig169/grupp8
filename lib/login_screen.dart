@@ -26,10 +26,13 @@ class LoginScreen extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Padding(
-                padding: EdgeInsets.only(right: 330, top: 20),
-                child: Column(
-                  children: [buttonBack(context)],
-                )),
+              padding: EdgeInsets.only(right: 330, top: 20),
+              child: Column(
+                children: [
+                  buttonBack(context)
+                ],
+              )
+            ),
             _userNameTextField(),
             _passwordTextField(),
             Padding(
@@ -40,7 +43,7 @@ class LoginScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [logInButton(context)],
               ),
-            ),
+            )
           ],
         ),
       ),
@@ -94,25 +97,30 @@ class LoginScreen extends StatelessWidget {
         child: IconButton(
             icon: Image.asset("assets/images/logInButton.png"),
             onPressed: () {
-              if (usernameInput.text != '' &&
-                  usernameInput.text != null &&
-                  passwordInput.text != '' &&
-                  passwordInput.text != null) {
+              if (usernameInput.text != '' && usernameInput.text != null
+                 && passwordInput.text != '' && passwordInput.text != null) {
                 Navigator.push(
                   context,
                   MaterialPageRoute(builder: (context) => (HomeScreen())),
                 );
               }
-            }),
+              else showDialog(context: context,
+              builder: (BuildContext context) {
+                return AlertDialog(
+                  title: Text("Oops! Looks like you forgot your username and/or password!"),
+                );
+              });
+            }
+        ),
       ),
     );
   }
-
   Widget buttonBack(context) {
     return FlatButton(
-        onPressed: () {
-          Navigator.pop(context);
-        },
-        child: Icon(Icons.arrow_back));
+      onPressed: () {
+        Navigator.pop(context);
+      },
+      child: Icon(Icons.arrow_back),
+    );
   }
 }
