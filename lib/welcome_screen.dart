@@ -15,7 +15,7 @@ class WelcomeScreen extends StatelessWidget {
       height: MediaQuery.of(context).size.height * 1,
       decoration: BoxDecoration(
           image: DecorationImage(
-              image: AssetImage("assets/images/framsida.png"),
+              image: AssetImage("assets/images/startview.png"),
               fit: BoxFit.cover)),
       child: Container(
         margin: const EdgeInsets.all(0.0),

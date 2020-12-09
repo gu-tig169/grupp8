@@ -16,7 +16,7 @@ class LoginScreen extends StatelessWidget {
       height: MediaQuery.of(context).size.height * 1,
       decoration: BoxDecoration(
           image: DecorationImage(
-              image: AssetImage("assets/images/framsida.png"),
+              image: AssetImage("assets/images/blurredbg.png"),
               fit: BoxFit.cover)),
       child: Container(
         margin: const EdgeInsets.all(0.0),
@@ -25,6 +25,11 @@ class LoginScreen extends StatelessWidget {
           mainAxisSize: MainAxisSize.max,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            Padding(
+                padding: EdgeInsets.only(right: 330, top: 20),
+                child: Column(
+                  children: [buttonBack(context)],
+                )),
             _userNameTextField(),
             _passwordTextField(),
             Padding(
@@ -35,7 +40,7 @@ class LoginScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [logInButton(context)],
               ),
-            )
+            ),
           ],
         ),
       ),
@@ -68,6 +73,7 @@ class LoginScreen extends StatelessWidget {
           top: 10,
         ),
         child: TextField(
+          obscureText: true,
           controller: passwordInput,
           decoration: InputDecoration(
               focusedBorder: OutlineInputBorder(
@@ -88,7 +94,10 @@ class LoginScreen extends StatelessWidget {
         child: IconButton(
             icon: Image.asset("assets/images/logInButton.png"),
             onPressed: () {
-              if (usernameInput.text != '' && usernameInput.text != null) {
+              if (usernameInput.text != '' &&
+                  usernameInput.text != null &&
+                  passwordInput.text != '' &&
+                  passwordInput.text != null) {
                 Navigator.push(
                   context,
                   MaterialPageRoute(builder: (context) => (HomeScreen())),
@@ -97,5 +106,13 @@ class LoginScreen extends StatelessWidget {
             }),
       ),
     );
+  }
+
+  Widget buttonBack(context) {
+    return FlatButton(
+        onPressed: () {
+          Navigator.pop(context);
+        },
+        child: Icon(Icons.arrow_back));
   }
 }
