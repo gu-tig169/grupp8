@@ -122,7 +122,9 @@ class LoginScreen extends StatelessWidget {
       onPressed: () {
         Navigator.pop(context);
       },
-      child: Icon(Icons.arrow_back),
+      child: Icon(Icons.arrow_back,
+      color: Color.fromARGB(255, 86, 75, 83),
+      ),
     );
   }
 }
