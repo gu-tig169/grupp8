@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'home_screen.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class LoginScreen extends StatelessWidget {
   @override
@@ -129,15 +130,24 @@ class LoginScreen extends StatelessWidget {
       ),
     );
   }
+
   Widget resetPasswordButton() {
     return FlatButton(
-      onPressed: () {},
-        child: Text('Reset Password',
+      onPressed: () async {
+        const url = 'https://unsplash.com/users/password/new';
+        if (await canLaunch(url)) {
+          await launch(url, forceWebView: true);
+        } else {
+          throw 'Could not launch $url';
+        }
+      
+      },
+        child: Text('Forgot your password?',
         style: TextStyle(
           color: Color.fromARGB(255, 86, 75, 83),
           decoration: TextDecoration.underline,
          ),
-        ),
-        );
+       ),
+    );
   }
 }
