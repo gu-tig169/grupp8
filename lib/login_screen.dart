@@ -41,7 +41,9 @@ class LoginScreen extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisSize: MainAxisSize.max,
                 mainAxisAlignment: MainAxisAlignment.end,
-                children: [logInButton(context)],
+                children: [logInButton(context),
+                resetPasswordButton(),
+                ],
               ),
             )
           ],
@@ -126,5 +128,16 @@ class LoginScreen extends StatelessWidget {
       color: Color.fromARGB(255, 86, 75, 83),
       ),
     );
+  }
+  Widget resetPasswordButton() {
+    return FlatButton(
+      onPressed: () {},
+        child: Text('Reset Password',
+        style: TextStyle(
+          color: Color.fromARGB(255, 86, 75, 83),
+          decoration: TextDecoration.underline,
+         ),
+        ),
+        );
   }
 }
