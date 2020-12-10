@@ -107,7 +107,9 @@ class LoginScreen extends StatelessWidget {
               else showDialog(context: context,
               builder: (BuildContext context) {
                 return AlertDialog(
+                  backgroundColor: Color.fromARGB(255, 86, 75, 83),
                   title: Text("Oops! Looks like you forgot your username and/or password!"),
+                  
                 );
               });
             }
