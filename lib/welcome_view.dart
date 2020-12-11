@@ -300,7 +300,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   Widget logInButtonBody() {
-    return Container(
+    return SizedBox(
       child: Transform.scale(
         scale: 6,
         child: IconButton(
@@ -312,7 +312,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   Widget registerButton() {
-    return Container(
+    return SizedBox(
       child: Transform.scale(
         scale: 6,
         child: IconButton(
@@ -323,7 +323,7 @@ class _HomePageState extends State<HomePage> {
           await launch(url, forceWebView: true);
         } else {
           throw 'Could not launch $url';}
-    
+      
             }),
       ),
     );
