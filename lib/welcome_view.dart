@@ -18,7 +18,7 @@ class WelcomeView extends StatelessWidget {
 
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'SlidingUpPanel Example',
+      title: '',
       theme: ThemeData(
         brightness: Brightness.dark,
         visualDensity: VisualDensity.adaptivePlatformDensity,
@@ -281,13 +281,13 @@ class _HomePageState extends State<HomePage> {
               decoration: TextDecoration.underline,
               color: Color.fromARGB(255, 107, 90, 100)),
         ),
-        onPressed: () async{
-                  const url = 'https://unsplash.com/users/password/new';
-        if (await canLaunch(url)) {
-          await launch(url, forceWebView: true);
-        } else {
-          throw 'Could not launch $url';
-        }
+        onPressed: () async {
+          const url = 'https://unsplash.com/users/password/new';
+          if (await canLaunch(url)) {
+            await launch(url, forceWebView: true);
+          } else {
+            throw 'Could not launch $url';
+          }
         },
       ),
     );
@@ -318,12 +318,12 @@ class _HomePageState extends State<HomePage> {
         child: IconButton(
             icon: Image.asset("assets/images/registerButton.png"),
             onPressed: () async {
-           const url = 'https://unsplash.com/join';
-        if (await canLaunch(url)) {
-          await launch(url, forceWebView: true);
-        } else {
-          throw 'Could not launch $url';}
-      
+              const url = 'https://unsplash.com/join';
+              if (await canLaunch(url)) {
+                await launch(url, forceWebView: true);
+              } else {
+                throw 'Could not launch $url';
+              }
             }),
       ),
     );
