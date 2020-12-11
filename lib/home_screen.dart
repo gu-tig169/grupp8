@@ -11,7 +11,13 @@ final List<String> _listItem = [
   'assets/images/chewy2.jpg',
   'assets/images/chewy3.jpg',
   'assets/images/chewy4.jpg',
+  'assets/images/chewy1.jpg',
+  'assets/images/chewy2.jpg',
+  'assets/images/chewy3.jpg',
+  'assets/images/chewy4.jpg',
 ];
+
+final TextEditingController imageSearch = new TextEditingController();
 
 // class _HomeScreenState extends State<HomeScreen> {
 //   @override
@@ -106,7 +112,10 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ),
               SizedBox(
-                height: 20,
+                child: (
+                  _searchImageTextField()
+                ),
+                height: 60,
               ),
               Expanded(
                   child: GridView.count(
@@ -126,15 +135,13 @@ class _HomeScreenState extends State<HomeScreen> {
                             child: Transform.translate(
                               offset: Offset(65, -65),
                               child: Container(
+                                
                                 margin: EdgeInsets.symmetric(
-                                    horizontal: 70, vertical: 70),
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(10),
-                                    color: Colors.white),
+                                    horizontal: 64, vertical: 64),
                                 child: IconButton(
-                                  icon: Icon(Icons.favorite_border),
-                                  alignment: Alignment.center,
-                                  color: Colors.black,
+                                  icon: Icon(Icons.favorite_border,
+                                  color: Colors.black),
+                                                                   
                                   onPressed: () {},
                                 ),
                               ),
@@ -149,4 +156,30 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
     );
   }
+  Widget _searchImageTextField() {
+    return Container(
+        margin: EdgeInsets.only(
+          left: 1,
+          right: 1,
+          top: 10,
+          bottom: 10
+        ),
+        child: TextField(
+          textAlignVertical: TextAlignVertical.bottom,
+          controller: imageSearch,
+          decoration: InputDecoration(
+            prefixIcon: Icon(Icons.search,
+            color: Colors.white),
+              focusedBorder: OutlineInputBorder(
+                  borderSide: BorderSide(color: Colors.white30, width: 2)),
+              enabledBorder: OutlineInputBorder(
+                  borderSide: BorderSide(color: Colors.white30, width: 2)),
+              hintText: "Search..",
+
+              hintStyle: TextStyle(
+                fontSize: 20
+              )),
+        )
+      );
+}
 }
