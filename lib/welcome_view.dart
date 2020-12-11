@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 import 'package:flutter/services.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import 'home_screen.dart';
 
@@ -102,7 +103,7 @@ class _HomePageState extends State<HomePage> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      logInButton(context),
+                      logInButtonSlider(context),
                     ],
                   ),
                   SizedBox(
@@ -145,7 +146,7 @@ class _HomePageState extends State<HomePage> {
             SizedBox(
               height: 425,
             ),
-            loginButton(),
+            logInButtonBody(),
             SizedBox(
               height: 10,
             ),
@@ -241,7 +242,7 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  Widget logInButton(context) {
+  Widget logInButtonSlider(context) {
     return Container(
       child: Transform.scale(
         scale: 6,
@@ -280,7 +281,14 @@ class _HomePageState extends State<HomePage> {
               decoration: TextDecoration.underline,
               color: Color.fromARGB(255, 107, 90, 100)),
         ),
-        onPressed: () {},
+        onPressed: () async{
+                  const url = 'https://unsplash.com/users/password/new';
+        if (await canLaunch(url)) {
+          await launch(url, forceWebView: true);
+        } else {
+          throw 'Could not launch $url';
+        }
+        },
       ),
     );
   }
@@ -291,7 +299,7 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  Widget loginButton() {
+  Widget logInButtonBody() {
     return Container(
       child: Transform.scale(
         scale: 6,
@@ -309,7 +317,14 @@ class _HomePageState extends State<HomePage> {
         scale: 6,
         child: IconButton(
             icon: Image.asset("assets/images/registerButton.png"),
-            onPressed: () {}),
+            onPressed: () async {
+           const url = 'https://unsplash.com/join';
+        if (await canLaunch(url)) {
+          await launch(url, forceWebView: true);
+        } else {
+          throw 'Could not launch $url';}
+    
+            }),
       ),
     );
   }
