@@ -27,13 +27,10 @@ class LoginScreen extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Padding(
-              padding: EdgeInsets.only(right: 330, top: 20),
-              child: Column(
-                children: [
-                  buttonBack(context)
-                ],
-              )
-            ),
+                padding: EdgeInsets.only(right: 330, top: 20),
+                child: Column(
+                  children: [buttonBack(context)],
+                )),
             _userNameTextField(),
             _passwordTextField(),
             Padding(
@@ -42,8 +39,9 @@ class LoginScreen extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisSize: MainAxisSize.max,
                 mainAxisAlignment: MainAxisAlignment.end,
-                children: [logInButton(context),
-                resetPasswordButton(),
+                children: [
+                  logInButton(context),
+                  resetPasswordButton(),
                 ],
               ),
             )
@@ -100,33 +98,50 @@ class LoginScreen extends StatelessWidget {
         child: IconButton(
             icon: Image.asset("assets/images/logInButton.png"),
             onPressed: () {
-              if (usernameInput.text != '' && usernameInput.text != null
-                 && passwordInput.text != '' && passwordInput.text != null) {
+              if (usernameInput.text != '' &&
+                  usernameInput.text != null &&
+                  passwordInput.text != '' &&
+                  passwordInput.text != null) {
                 Navigator.push(
                   context,
                   MaterialPageRoute(builder: (context) => (HomeScreen())),
                 );
-              }
-              else showDialog(context: context,
-              builder: (BuildContext context) {
-                return AlertDialog(
-                  backgroundColor: Color.fromARGB(255, 86, 75, 83),
-                  title: Text("Oops! Looks like you forgot your username and/or password!"),
-                  
-                );
-              });
-            }
-        ),
+              } else
+                showDialog(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return AlertDialog(
+                        backgroundColor: Color.fromARGB(255, 86, 75, 83),
+                        title: Text(
+                          "Oops! Looks like you forgot your username and/or password!",
+                          textAlign: TextAlign.center,
+                        ),
+                        actions: <Widget>[
+                          TextButton(
+                            child: Text(
+                              'Ok',
+                              style: TextStyle(color: Colors.white),
+                            ),
+                            onPressed: () {
+                              Navigator.of(context).pop();
+                            },
+                          ),
+                        ],
+                      );
+                    });
+            }),
       ),
     );
   }
+
   Widget buttonBack(context) {
     return FlatButton(
       onPressed: () {
         Navigator.pop(context);
       },
-      child: Icon(Icons.arrow_back,
-      color: Color.fromARGB(255, 86, 75, 83),
+      child: Icon(
+        Icons.arrow_back,
+        color: Color.fromARGB(255, 86, 75, 83),
       ),
     );
   }
@@ -140,14 +155,14 @@ class LoginScreen extends StatelessWidget {
         } else {
           throw 'Could not launch $url';
         }
-      
       },
-        child: Text('Forgot your password?',
+      child: Text(
+        'Forgot your password?',
         style: TextStyle(
           color: Color.fromARGB(255, 86, 75, 83),
           decoration: TextDecoration.underline,
-         ),
-       ),
+        ),
+      ),
     );
   }
 }
