@@ -1,4 +1,4 @@
-name: gtupp_8
+name: grupp_8
 description: A new Flutter project.
 
 # The following line prevents the package from being accidentally published to
@@ -23,6 +23,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+    
 
 
   # The following adds the Cupertino Icons font to your application.
@@ -31,6 +32,7 @@ dependencies:
   provider: ^4.3.2+3
   http: ^0.12.2
   sliding_up_panel: ^1.0.2
+  url_launcher: ^5.7.9
 
 dev_dependencies:
   flutter_test:
