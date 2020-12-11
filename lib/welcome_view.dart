@@ -171,8 +171,8 @@ class _HomePageState extends State<HomePage> {
         cursorColor: Color.fromARGB(255, 107, 90, 100),
         textAlignVertical: TextAlignVertical.center,
         textAlign: TextAlign.center,
-        obscureText: true,
-        controller: passwordInput,
+        obscureText: false,
+        controller: usernameInput,
         decoration: InputDecoration(
           contentPadding: const EdgeInsets.symmetric(vertical: 15.0),
           border: OutlineInputBorder(
