@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'login_screen.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class WelcomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
         home: Scaffold(
-            backgroundColor: Colors.tealAccent, body: background(context)));
+            backgroundColor: Colors.tealAccent, 
+            body: background(context)));
   }
 
   Widget background(context) {
@@ -58,8 +60,17 @@ class WelcomeScreen extends StatelessWidget {
         scale: 6,
         child: IconButton(
             icon: Image.asset("assets/images/registerButton.png"),
-            onPressed: () {}),
+            onPressed: () async {
+        const url = 'https://unsplash.com/join';
+        if (await canLaunch(url)) {
+          await launch(url, forceWebView: true);
+        } else {
+          throw 'Could not launch $url';}
+    
+            }
+          ),
       ),
     );
   }
 }
+

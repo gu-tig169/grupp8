@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'home_screen.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class LoginScreen extends StatelessWidget {
   @override
@@ -41,7 +42,9 @@ class LoginScreen extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisSize: MainAxisSize.max,
                 mainAxisAlignment: MainAxisAlignment.end,
-                children: [logInButton(context)],
+                children: [logInButton(context),
+                resetPasswordButton(),
+                ],
               ),
             )
           ],
@@ -125,6 +128,26 @@ class LoginScreen extends StatelessWidget {
       child: Icon(Icons.arrow_back,
       color: Color.fromARGB(255, 86, 75, 83),
       ),
+    );
+  }
+
+  Widget resetPasswordButton() {
+    return FlatButton(
+      onPressed: () async {
+        const url = 'https://unsplash.com/users/password/new';
+        if (await canLaunch(url)) {
+          await launch(url, forceWebView: true);
+        } else {
+          throw 'Could not launch $url';
+        }
+      
+      },
+        child: Text('Forgot your password?',
+        style: TextStyle(
+          color: Color.fromARGB(255, 86, 75, 83),
+          decoration: TextDecoration.underline,
+         ),
+       ),
     );
   }
 }
