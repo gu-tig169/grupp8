@@ -55,62 +55,13 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color.fromARGB(255, 86, 75, 83),
-      appBar: AppBar(
-          backgroundColor: Colors.transparent,
-          elevation: 0,
-          leading: GestureDetector(
-            child: Icon(Icons.info),
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => (AboutUs())),
-              );
-            },
-          ),
-          actions: <Widget>[
-            IconButton(
-              icon: Icon(Icons.person),
-              onPressed: () {},
-            ),
-          ]),
+      appBar: _appBar(),
       body: SafeArea(
         child: Container(
           padding: EdgeInsets.all(20.0),
           child: Column(
             children: <Widget>[
-              Container(
-                width: double.infinity,
-                height: 210,
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(20),
-                    image: DecorationImage(
-                        image: AssetImage('assets/images/chewy1.jpg'),
-                        fit: BoxFit.cover)),
-                child: Container(
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(20),
-                      gradient:
-                          LinearGradient(begin: Alignment.bottomRight, colors: [
-                        Colors.black.withOpacity(.4),
-                        Colors.black.withOpacity(.2),
-                      ])),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      Padding(
-                          padding: const EdgeInsets.only(left: 10, bottom: 10),
-                          child: Text(
-                            "Chewy by the lake",
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 17,
-                            ),
-                          )),
-                    ],
-                  ),
-                ),
-              ),
+              _topImage(),
               SizedBox(
                 child: (
                   _searchImageTextField()
@@ -149,13 +100,77 @@ class _HomeScreenState extends State<HomeScreen> {
                           ),
                         ))
                     .toList(),
-              ))
+                ),
+              ),
             ],
           ),
         ),
       ),
     );
   }
+
+  Widget _appBar() {
+    return AppBar(
+          backgroundColor: Colors.transparent,
+          elevation: 0,
+          leading: GestureDetector(
+            child: Icon(Icons.info),
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => (AboutUs())),
+              );
+            },
+          ),
+          actions: <Widget>[
+            IconButton(
+              icon: Icon(Icons.person),
+              onPressed: () {},
+            ),
+          ]
+      );
+  }
+
+  Widget _topImage() {
+    return Container(
+          width: double.infinity,
+          height: 210,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(20),
+            image: DecorationImage(
+                  image: AssetImage('assets/images/chewy1.jpg'),
+                  fit: BoxFit.cover)),
+            child: Container(
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(20),
+                      gradient: LinearGradient(
+                        begin: Alignment.bottomRight, 
+                        colors: [
+                          Colors.black.withOpacity(.4),
+                          Colors.black.withOpacity(.2),
+                        ]
+                      ),
+                    ),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Padding(
+                          padding: const EdgeInsets.only(left: 10, bottom: 10),
+                          child: Text(
+                            "Chewy by the lake",
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 17,
+                            ),
+                          ),
+                      ),
+                    ],
+                  ),
+              ),
+      );
+  }
+
   Widget _searchImageTextField() {
     return Container(
         margin: EdgeInsets.only(
