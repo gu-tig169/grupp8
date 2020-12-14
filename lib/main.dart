@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 // import 'package:provider/provider.dart';
 
-import 'welcome_screen.dart';
+import 'welcome_view.dart';
 
 void main() {
-
   runApp(
     MyApp(),
   );
@@ -23,7 +22,7 @@ class _MyAppState extends State<MyApp> {
         brightness: Brightness.dark,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: WelcomeScreen(),
+      home: WelcomeView(),
     );
   }
 }

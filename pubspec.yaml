@@ -1,4 +1,4 @@
-name: gtupp_8
+name: grupp_8
 description: A new Flutter project.
 
 # The following line prevents the package from being accidentally published to
@@ -31,6 +31,7 @@ dependencies:
   cupertino_icons: ^1.0.0
   provider: ^4.3.2+3
   http: ^0.12.2
+  sliding_up_panel: ^1.0.2
   url_launcher: ^5.7.9
 
 dev_dependencies:
@@ -42,6 +43,11 @@ dev_dependencies:
 
 # The following section is specific to Flutter.
 flutter:
+  fonts:
+    - family: Syncopate
+      fonts:
+        - asset: assets/fonts/Syncopate-Regular.ttf
+        - asset: assets/fonts/Syncopate-Bold.ttf
 
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
