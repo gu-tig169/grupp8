@@ -146,11 +146,11 @@ class _HomePageState extends State<HomePage> {
             SizedBox(
               height: 425,
             ),
-            logInButtonBody(),
+            loginButtonBody(),
             SizedBox(
               height: 10,
             ),
-            registerButton(),
+            registerButtonBody(),
             SizedBox(
               height: 50,
             ),
@@ -244,30 +244,42 @@ class _HomePageState extends State<HomePage> {
 
   Widget logInButtonSlider(context) {
     return Container(
-      child: Transform.scale(
-        scale: 6,
-        child: IconButton(
-            icon: Image.asset("assets/images/logInButton.png"),
-            onPressed: () {
-              if (usernameInput.text != '' &&
-                  usernameInput.text != null &&
-                  passwordInput.text != '' &&
-                  passwordInput.text != null) {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => (HomeScreen())),
-                );
-              } else
-                showDialog(
-                    context: context,
-                    builder: (BuildContext context) {
-                      return AlertDialog(
-                        backgroundColor: Color.fromARGB(255, 86, 75, 83),
-                        title: Text(
-                            "Oops! Looks like you forgot your username and/or password!"),
-                      );
-                    });
-            }),
+      child: SizedBox(
+        width: 185,
+        height: 45,
+        child: RaisedButton(
+          elevation: 7.0,
+          textColor: Color.fromARGB(255, 224, 234, 255),
+          child: Text(
+            "Log in",
+            style: TextStyle(fontSize: 15, fontWeight: FontWeight.w600),
+          ),
+          color: Color.fromARGB(255, 86, 75, 83),
+          shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(40.0),
+              side: BorderSide(color: Color.fromARGB(255, 86, 75, 83))),
+          onPressed: () {
+            if (usernameInput.text != '' &&
+                usernameInput.text != null &&
+                passwordInput.text != '' &&
+                passwordInput.text != null) {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => (HomeScreen())),
+              );
+            } else
+              showDialog(
+                context: context,
+                builder: (BuildContext context) {
+                  return AlertDialog(
+                    backgroundColor: Color.fromARGB(255, 86, 75, 83),
+                    title: Text(
+                        "Oops! Looks like you forgot your username and/or password!"),
+                  );
+                },
+              );
+          },
+        ),
       ),
     );
   }
@@ -299,24 +311,46 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  Widget logInButtonBody() {
-    return SizedBox(
-      child: Transform.scale(
-        scale: 6,
-        child: IconButton(
-          icon: Image.asset("assets/images/logInButton.png"),
+  Widget loginButtonBody() {
+    return Container(
+      child: SizedBox(
+        width: 185,
+        height: 45,
+        child: RaisedButton(
+          elevation: 7.0,
+          textColor: Color.fromARGB(255, 224, 234, 255),
+          child: Text(
+            "Log in",
+            style: TextStyle(fontSize: 15, fontWeight: FontWeight.w600),
+          ),
+          color: Color.fromARGB(255, 86, 75, 83),
+          shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(40.0),
+              side: BorderSide(color: Color.fromARGB(255, 86, 75, 83))),
           onPressed: () => _pc.open(),
         ),
       ),
     );
   }
 
-  Widget registerButton() {
-    return SizedBox(
-      child: Transform.scale(
-        scale: 6,
-        child: IconButton(
-            icon: Image.asset("assets/images/registerButton.png"),
+  Widget registerButtonBody() {
+    return Container(
+      child: SizedBox(
+        width: 185,
+        height: 45,
+        child: FlatButton(
+            textColor: Color.fromARGB(255, 51, 51, 51),
+            child: Text(
+              "Register",
+              style: TextStyle(fontSize: 15, fontWeight: FontWeight.w600),
+            ),
+            color: Color.fromARGB(75, 196, 196, 196),
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(40.0),
+                side: BorderSide(
+                    style: BorderStyle.none,
+                    width: 0,
+                    color: Color.fromARGB(255, 86, 75, 83))),
             onPressed: () async {
               const url = 'https://unsplash.com/join';
               if (await canLaunch(url)) {
