@@ -63,44 +63,11 @@ class _HomeScreenState extends State<HomeScreen> {
             children: <Widget>[
               _topImage(),
               SizedBox(
-                child: (
-                  _searchImageTextField()
-                ),
+                child: _searchImageTextField(),
                 height: 60,
               ),
               Expanded(
-                  child: GridView.count(
-                crossAxisCount: 2,
-                crossAxisSpacing: 10,
-                mainAxisSpacing: 10,
-                children: _listItem
-                    .map((item) => Card(
-                          color: Colors.transparent,
-                          elevation: 0,
-                          child: Container(
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(20),
-                                image: DecorationImage(
-                                    image: AssetImage(item),
-                                    fit: BoxFit.cover)),
-                            child: Transform.translate(
-                              offset: Offset(65, -65),
-                              child: Container(
-                                
-                                margin: EdgeInsets.symmetric(
-                                    horizontal: 64, vertical: 64),
-                                child: IconButton(
-                                  icon: Icon(Icons.favorite_border,
-                                  color: Colors.black),
-                                                                   
-                                  onPressed: () {},
-                                ),
-                              ),
-                            ),
-                          ),
-                        ))
-                    .toList(),
-                ),
+                child: _pictureGridView(),
               ),
             ],
           ),
@@ -111,65 +78,105 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Widget _appBar() {
     return AppBar(
-          backgroundColor: Colors.transparent,
-          elevation: 0,
-          leading: GestureDetector(
-            child: Icon(Icons.info),
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => (AboutUs())),
-              );
-            },
-          ),
-          actions: <Widget>[
-            IconButton(
-              icon: Icon(Icons.person),
-              onPressed: () {},
-            ),
-          ]
-      );
+      backgroundColor: Colors.transparent,
+      elevation: 0,
+      leading: GestureDetector(
+        child: Icon(Icons.info),
+        onTap: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => (AboutUs())),
+          );
+        },
+      ),
+      actions: <Widget>[
+        IconButton(
+          icon: Icon(Icons.person),
+          onPressed: () {},
+        ),
+      ]
+    );
   }
 
   Widget _topImage() {
     return Container(
-          width: double.infinity,
-          height: 210,
+        width: double.infinity,
+        height: 210,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(20),
+          image: DecorationImage(
+              image: AssetImage('assets/images/chewy1.jpg'),
+              fit: BoxFit.cover
+          ),
+        ),
+        child: Container(
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(20),
-            image: DecorationImage(
-                  image: AssetImage('assets/images/chewy1.jpg'),
-                  fit: BoxFit.cover)
-          ),
-          child: Container(
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(20),
-              gradient: LinearGradient(
-                begin: Alignment.bottomRight, 
-                colors: [
-                  Colors.black.withOpacity(.4),
-                  Colors.black.withOpacity(.2),                  
-                ]
-              ),
+            gradient: LinearGradient(
+              begin: Alignment.bottomRight, 
+              colors: [
+                Colors.black.withOpacity(.4),
+                Colors.black.withOpacity(.2),                  
+              ]
             ),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.end,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              Padding(
-                padding: const EdgeInsets.only(left: 10, bottom: 10),
-                  child: Text(
-                    "Chewy by the lake", 
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 17,
+          ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.end,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Padding(
+              padding: const EdgeInsets.only(left: 10, bottom: 10),
+                child: Text(
+                  "Chewy by the lake", 
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 17,
+                  ),
+                ),
+            ),
+          ],
+        ),
+        ),
+    );
+  }
+
+  Widget _pictureGridView() {
+    return GridView.count(
+        crossAxisCount: 2,
+        crossAxisSpacing: 10,
+        mainAxisSpacing: 10,
+        children: _listItem
+            .map((item) => Card(
+                color: Colors.transparent,
+                elevation: 0,
+                child: Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(20),
+                    image: DecorationImage(
+                      image: AssetImage(item),
+                      fit: BoxFit.cover
                     ),
                   ),
+                  child: Transform.translate(
+                    offset: Offset(65, -65),
+                    child: Container(  
+                      margin: EdgeInsets.symmetric(
+                        horizontal: 64, 
+                        vertical: 64
+                      ),
+                      child: IconButton(
+                        icon: Icon(
+                          Icons.favorite_border,
+                          color: Colors.black
+                        ),
+                        onPressed: () {},
+                      ),
+                    ),
+                  ),
+                ),
               ),
-            ],
-          ),
-          ),
-    );
+            ).toList(),
+      );
   }
 
   Widget _searchImageTextField() {
