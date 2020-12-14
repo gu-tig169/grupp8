@@ -152,7 +152,11 @@ class _HomePageState extends State<HomePage> {
             ),
             registerButtonBody(),
             SizedBox(
-              height: 50,
+              height: 20,
+            ),
+            unsplashLogo(),
+            SizedBox(
+              height: 20,
             ),
           ],
         ),
@@ -306,8 +310,21 @@ class _HomePageState extends State<HomePage> {
   }
 
   Widget logoImage() {
-    return Text('''PLENTY 
-OF PICS''',style: TextStyle(fontSize: 48, fontFamily: "Syncopate" ),);
+    return Text(
+      '''PLENTY 
+OF PICS''',
+      style: TextStyle(
+          shadows: <Shadow>[
+            Shadow(
+              offset: Offset(1.0, 1.0),
+              blurRadius: 3.0,
+              color: Color.fromARGB(255, 0, 0, 0),
+            )
+          ],
+          color: Color.fromARGB(255, 224, 234, 255),
+          fontSize: 48,
+          fontFamily: "Syncopate"),
+    );
   }
 
   Widget loginButtonBody() {
@@ -359,6 +376,21 @@ OF PICS''',style: TextStyle(fontSize: 48, fontFamily: "Syncopate" ),);
               }
             }),
       ),
+    );
+  }
+
+  Widget unsplashLogo() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: <Widget>[
+        Text("Powered by ",
+            style: TextStyle(
+                fontSize: 12, color: Color.fromARGB(255, 51, 51, 51))),
+        Container(
+          height: 15,
+          child: new Image.asset("assets/images/Unsplash_Logo_Full.png"),
+        ),
+      ],
     );
   }
 }
