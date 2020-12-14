@@ -19,37 +19,6 @@ final List<String> _listItem = [
 
 final TextEditingController imageSearch = new TextEditingController();
 
-// class _HomeScreenState extends State<HomeScreen> {
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//         body: Stack(
-//       children: <Widget>[
-//         Container(
-//           color: Color.fromARGB(255, 86, 75, 83),
-//         ),
-//         Positioned(
-//           child: AppBar(backgroundColor: Colors.transparent, actions: <Widget>[
-//             IconButton(
-//               icon: Icon(Icons.info),
-//               onPressed: () {
-//                 Navigator.push(
-//                   context,
-//                   MaterialPageRoute(builder: (context) => (AboutUs())),
-//                 );
-//               },
-//             ),
-//             IconButton(
-//               icon: Icon(Icons.person),
-//               onPressed: () {},
-//             )
-//           ]),
-//         ),
-//       ],
-//     ));
-//   }
-// }
-
 class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
@@ -114,7 +83,8 @@ class _HomeScreenState extends State<HomeScreen> {
           backgroundColor: Colors.transparent,
           elevation: 0,
           leading: GestureDetector(
-            child: Icon(Icons.info),
+            child: Icon(Icons.info,
+            color: Colors.white),
             onTap: () {
               Navigator.push(
                 context,
@@ -124,7 +94,8 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
           actions: <Widget>[
             IconButton(
-              icon: Icon(Icons.person),
+              icon: Icon(Icons.person,
+              color: Colors.white),
               onPressed: () {},
             ),
           ]
@@ -191,8 +162,8 @@ class _HomeScreenState extends State<HomeScreen> {
               enabledBorder: OutlineInputBorder(
                   borderSide: BorderSide(color: Colors.white30, width: 2)),
               hintText: "Search..",
-
               hintStyle: TextStyle(
+                color: Colors.white,
                 fontSize: 20
               )),
         )
