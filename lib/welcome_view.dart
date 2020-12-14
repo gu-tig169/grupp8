@@ -294,9 +294,8 @@ class _HomePageState extends State<HomePage> {
   }
 
   Widget logoImage() {
-    return Container(
-      child: new Image.asset("assets/images/logo.png"),
-    );
+    return Text('''PLENTY 
+OF PICS''',style: TextStyle(fontSize: 48, fontFamily: "Syncopate" ),);
   }
 
   Widget logInButtonBody() {
