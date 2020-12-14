@@ -139,36 +139,37 @@ class _HomeScreenState extends State<HomeScreen> {
             borderRadius: BorderRadius.circular(20),
             image: DecorationImage(
                   image: AssetImage('assets/images/chewy1.jpg'),
-                  fit: BoxFit.cover)),
-            child: Container(
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(20),
-                      gradient: LinearGradient(
-                        begin: Alignment.bottomRight, 
-                        colors: [
-                          Colors.black.withOpacity(.4),
-                          Colors.black.withOpacity(.2),
-                        ]
-                      ),
+                  fit: BoxFit.cover)
+          ),
+          child: Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(20),
+              gradient: LinearGradient(
+                begin: Alignment.bottomRight, 
+                colors: [
+                  Colors.black.withOpacity(.4),
+                  Colors.black.withOpacity(.2),                  
+                ]
+              ),
+            ),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.end,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Padding(
+                padding: const EdgeInsets.only(left: 10, bottom: 10),
+                  child: Text(
+                    "Chewy by the lake", 
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 17,
                     ),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      Padding(
-                          padding: const EdgeInsets.only(left: 10, bottom: 10),
-                          child: Text(
-                            "Chewy by the lake",
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 17,
-                            ),
-                          ),
-                      ),
-                    ],
                   ),
               ),
-      );
+            ],
+          ),
+          ),
+    );
   }
 
   Widget _searchImageTextField() {
