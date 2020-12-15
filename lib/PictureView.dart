@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import './home_screen.dart';
+import 'package:like_button/like_button.dart';
 
 class PictureView extends StatefulWidget {
 
@@ -35,11 +36,11 @@ class _PictureViewState extends State<PictureView> {
           },
         ),
       title: Text(
-        '*Picturetext*', 
-        style: TextStyle(
-          fontSize: 18, 
-          fontWeight: FontWeight.w400
-        ),
+          '*Picturetext*', 
+          style: TextStyle(
+            fontSize: 18, 
+            fontWeight: FontWeight.w400
+          ),
       ),
     );
   }
@@ -75,7 +76,7 @@ class _PictureViewState extends State<PictureView> {
             alignment: Alignment.bottomCenter,
             child: Container(
               color: Colors.black,
-              width: 400,
+              width: 4000,
               height: 60,
             ),
           ),
@@ -86,9 +87,9 @@ class _PictureViewState extends State<PictureView> {
           left: 30,
         ),
         Positioned(
-          child: _heartIcon(),
-            bottom: 5,
-            right: 30,
+          child: _heartButton(),
+            bottom: 17,
+            right: 35,
         ),
       ],
     );
@@ -99,7 +100,7 @@ class _PictureViewState extends State<PictureView> {
       icon: Icon(
         Icons.share, 
         color: Colors.white,
-        size: 25,
+        size: 30,
       ),
       onPressed: () {
         print('Shared');
@@ -107,8 +108,31 @@ class _PictureViewState extends State<PictureView> {
     );
   }
 
-  Widget _heartIcon() {
+//Kolla om man kan ta bort effekten för cirklarna runt om LikeButton. Annars, modifiera dem så att det passar UI. 
+  Widget _heartButton() {
+    return LikeButton(
+      size: 25.0,
+      onTap: onLikeButtonTapped,
+      likeBuilder: (bool isLiked) {
+        return Icon(
+          Icons.favorite_sharp,
+          color: isLiked ? Colors.redAccent : Colors.white,
+          size: 30.0,
+        );
+      },
+    );
+  }
+
+Future<bool> onLikeButtonTapped(bool isLiked) async {
+  //När den tappas, gör något (typ spara i lista)?
+  return !isLiked;
+}
+
+
+//Har kvar denna om vi vill byta tillbaka till outlined-hjärta
+ /* Widget _heartIcon() {
     return IconButton(
+
       icon: Icon(
         Icons.favorite_border_outlined, 
         color: Colors.white,
@@ -118,5 +142,6 @@ class _PictureViewState extends State<PictureView> {
         print('Liked');
       },
     );
-  }
+  }*/
+
 }
