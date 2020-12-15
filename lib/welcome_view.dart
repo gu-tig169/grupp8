@@ -60,7 +60,7 @@ class _HomePageState extends State<HomePage> {
               child: Column(
                 children: [
                   SizedBox(
-                    height: 0.0,
+                    height: 5.0,
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -76,7 +76,7 @@ class _HomePageState extends State<HomePage> {
                     ],
                   ),
                   SizedBox(
-                    height: 40,
+                    height: 35,
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
