@@ -12,72 +12,7 @@ class _PictureViewState extends State<PictureView> {
     return Scaffold(
       backgroundColor: Colors.black,
       appBar: _appBar(),
-      body:  
-        Stack(
-          children: [
-            Container(
-              height: double.infinity,
-              width: double.infinity,
-              child: Container( 
-                height: 30.0,
-                child: Image(
-                  fit: BoxFit.scaleDown,
-                  alignment: Alignment.center,
-                  image: AssetImage('assets/images/chewy2.jpg'), // gör om detta till så att den lyssnar på vilken item den ska visa
-                ),
-              ),
-            ),
-            Positioned(
-              child: Container(
-                height: 30,
-                width: double.infinity,
-                color: Colors.black,
-              ),
-            ), 
-            Positioned(
-              child: OverflowBox(
-                minHeight: 0.0,
-                minWidth: 0.0,
-                maxHeight: double.infinity,
-                maxWidth: double.infinity,
-                alignment: Alignment.bottomCenter,
-                child: Container(
-                  color: Colors.black,
-                  width: 400,
-                  height: 60,
-                ),
-              ),
-            ),   
-            Positioned(
-              child: IconButton(
-                icon: Icon(
-                  Icons.share, 
-                  color: Colors.white,
-                  size: 25,
-                ),
-                onPressed: () {
-                  print('Shared');
-                },
-              ),
-                bottom: 5,
-                left: 30,
-            ),
-            Positioned(
-              child: IconButton(
-                icon: Icon(
-                  Icons.favorite_border_outlined, 
-                  color: Colors.white,
-                  size: 25,
-                ),
-                onPressed: () {
-                  print('Liked');
-                },
-              ),
-                bottom: 5,
-                right: 30,
-            ),
-          ],
-        ),
+      body: _pictureView(), 
     );
   }
 
@@ -100,12 +35,88 @@ class _PictureViewState extends State<PictureView> {
           },
         ),
       title: Text(
-          '*Picturetext*', 
-          style: TextStyle(
-            fontSize: 18, 
-            fontWeight: FontWeight.w400
-          ),
+        '*Picturetext*', 
+        style: TextStyle(
+          fontSize: 18, 
+          fontWeight: FontWeight.w400
+        ),
       ),
+    );
+  }
+
+  Widget _pictureView() {
+    return Stack(
+      children: [
+        Container(
+          height: double.infinity,
+          width: double.infinity,
+          child: Container( 
+            height: 30.0,
+            child: Image(
+              fit: BoxFit.scaleDown,
+              alignment: Alignment.center,
+              image: AssetImage('assets/images/chewy2.jpg'), // gör om detta till så att den lyssnar på vilken item den ska visa
+            ),
+          ),
+        ),
+        Positioned(
+          child: Container(
+            height: 30,
+            width: double.infinity,
+            color: Colors.black,
+          ),
+        ), 
+        Positioned(
+          child: OverflowBox(
+            minHeight: 0.0,
+            minWidth: 0.0,
+            maxHeight: double.infinity,
+            maxWidth: double.infinity,
+            alignment: Alignment.bottomCenter,
+            child: Container(
+              color: Colors.black,
+              width: 400,
+              height: 60,
+            ),
+          ),
+        ),   
+        Positioned(
+          child: _shareIcon(),
+          bottom: 5,
+          left: 30,
+        ),
+        Positioned(
+          child: _heartIcon(),
+            bottom: 5,
+            right: 30,
+        ),
+      ],
+    );
+  }
+
+  Widget _shareIcon() {
+    return IconButton(
+      icon: Icon(
+        Icons.share, 
+        color: Colors.white,
+        size: 25,
+      ),
+      onPressed: () {
+        print('Shared');
+      },
+    );
+  }
+
+  Widget _heartIcon() {
+    return IconButton(
+      icon: Icon(
+        Icons.favorite_border_outlined, 
+        color: Colors.white,
+        size: 25,
+      ),
+      onPressed: () {
+        print('Liked');
+      },
     );
   }
 }
