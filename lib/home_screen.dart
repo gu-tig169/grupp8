@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'aboutUs_screen.dart';
+import './PictureView.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -121,37 +122,46 @@ class _HomeScreenState extends State<HomeScreen> {
         crossAxisSpacing: 10,
         mainAxisSpacing: 10,
         children: _listItem
-            .map((item) => Card(
-                color: Colors.transparent,
-                elevation: 0,
-                child: Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(20),
-                    image: DecorationImage(
-                      image: AssetImage(item),
-                      fit: BoxFit.cover
-                    ),
-                  ),
-                  child: Transform.translate(
-                    offset: Offset(65, -65),
-                    child: Container(  
-                      margin: EdgeInsets.symmetric(
-                        horizontal: 64, 
-                        vertical: 64
-                      ),
-                      child: IconButton(
-                        icon: Icon(
-                          Icons.favorite_border,
-                          color: Colors.black
+            .map((item) => GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => (PictureView())), // Visar enbart en bild nu, som är förvald
+                    );
+                      print('You have pressed a picture');
+                    },
+                  child: Card(
+                  color: Colors.transparent,
+                  elevation: 0,
+                    child: Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(20),
+                        image: DecorationImage(
+                          image: AssetImage(item),
+                          fit: BoxFit.cover
                         ),
-                        onPressed: () {},
+                      ),
+                      child: Transform.translate(
+                        offset: Offset(65, -65),
+                        child: Container(  
+                          margin: EdgeInsets.symmetric(
+                            horizontal: 64, 
+                            vertical: 64
+                          ),
+                          child: IconButton(
+                            icon: Icon(
+                              Icons.favorite_border,
+                              color: Colors.black
+                            ),
+                            onPressed: () {},
+                          ),
+                        ),
                       ),
                     ),
                   ),
                 ),
-              ),
             ).toList(),
-      );
+    );
   }
 
   Widget _searchImageTextField() {
