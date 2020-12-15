@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'welcome_view.dart';
+import 'home_screen.dart';
 
 class AboutUs extends StatefulWidget {
   @override
@@ -15,7 +16,12 @@ class _AboutUsState extends State<AboutUs> {
         backgroundColor: Colors.transparent, 
         leading: IconButton(
           icon: Icon(Icons.arrow_back),
-          onPressed: () {}
+          onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => (HomeScreen())),
+                    );
+                  },
           ),
         ),
         body: Stack(
