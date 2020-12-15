@@ -10,50 +10,71 @@ class _PictureViewState extends State<PictureView> {
 @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromARGB(255, 86, 75, 83),
+      backgroundColor: Colors.black,
       appBar: _appBar(),
       body:  
         Stack(
           children: [
             Container(
-              height: 588,
-              decoration: BoxDecoration(
+              height: double.maxFinite,
+              width: double.infinity,
+              child: Container( 
+                height: 30.0,
+                child: Image(
+                  fit: BoxFit.scaleDown,
+                  alignment: Alignment.center,
+                  image: AssetImage('assets/images/chewy3.jpg'), // gör om detta till så att den lyssnar på vilken item den ska visa
+                ),
+              ),
+            ),
+            Positioned(
+              child: Container(
+                height: 30,
+                width: double.infinity,
                 color: Colors.black,
               ),
-              child: Image(
-                fit: BoxFit.scaleDown,
-                alignment: Alignment.center,
-                image: AssetImage('assets/images/chewy1.jpg'), // gör om detta till så att den lyssnar på vilken item den ska visa
-              ),
-            ),
+            ), 
             Positioned(
-              child: Text(
-                '*Picturetext*', 
-                style: TextStyle(
-                  fontSize: 18, 
-                  color: Colors.white
+              child: OverflowBox(
+                minHeight: 0.0,
+                minWidth: 0.0,
+                maxHeight: double.infinity,
+                maxWidth: double.infinity,
+                alignment: Alignment.bottomCenter,
+                child: Container(
+                  color: Colors.black,
+                  width: 400,
+                  height: 60,
                 ),
               ),
-              bottom: 15,
-              left: 10,
-            ),
-            Positioned( 
-              child: Icon(
-                Icons.circle, 
-                color: Color.fromARGB(255, 86, 75, 83),
-                size: 60,
+            ),   
+            Positioned(
+              child: IconButton(
+                icon: Icon(
+                  Icons.share, 
+                  color: Colors.white,
+                  size: 25,
+                ),
+                onPressed: () {
+                  print('Shared');
+                },
               ),
-              bottom: 15,
-              right: 15,
+                bottom: 5,
+                left: 30,
             ),
             Positioned(
-              child: Icon(
-                Icons.favorite_border_outlined, // Borde kanske göra om dessa till en Iconbutton istället
-                color: Colors.white,
-                size: 22,
+              child: IconButton(
+                icon: Icon(
+                  Icons.favorite_border_outlined, 
+                  color: Colors.white,
+                  size: 25,
                 ),
-                bottom: 33,
-                right: 35,
+                onPressed: () {
+                  print('Liked');
+                },
+              ),
+                bottom: 5,
+                right: 30,
             ),
           ],
         ),
@@ -62,7 +83,8 @@ class _PictureViewState extends State<PictureView> {
 
   Widget _appBar() {
     return AppBar(
-      backgroundColor: Colors.transparent,
+      centerTitle: true,
+      backgroundColor: Colors.black,
       elevation: 0,
       leading:
         IconButton(
@@ -77,6 +99,13 @@ class _PictureViewState extends State<PictureView> {
             );
           },
         ),
+      title: Text(
+          '*Picturetext*', 
+          style: TextStyle(
+            fontSize: 18, 
+            fontWeight: FontWeight.w400
+          ),
+      ),
     );
   }
 }
