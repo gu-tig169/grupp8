@@ -279,12 +279,14 @@ class _HomePageState extends State<HomePage> {
                     backgroundColor: Color.fromARGB(255, 86, 75, 83),
                     title: Text(
                         "Oops! Looks like you forgot your username and/or password!",
-                        textAlign: TextAlign.center),
+                        textAlign: TextAlign.left),
                     actions: <Widget>[
                       TextButton(
                         child: Text(
-                          'Ok',
-                          style: TextStyle(color: Colors.white),
+                          'Try again',
+                          style: TextStyle(
+                            color: Colors.white,
+                          ),
                         ),
                         onPressed: () {
                           Navigator.of(context).pop();
