@@ -31,9 +31,9 @@ class _AboutUsState extends State<AboutUs> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Padding(
-                  padding: EdgeInsets.all(20),
+                  padding: EdgeInsets.only(bottom: 15.0),
                   child: Text(
-                    "GRUPP 8",
+                    "ABOUT US",
                     style: TextStyle(
                       fontSize: 35,
                       letterSpacing: 1.5,
@@ -44,8 +44,8 @@ class _AboutUsState extends State<AboutUs> {
                 ),
                 Container(
                   padding: EdgeInsets.all(10.0),
-                  width: MediaQuery.of(context).size.width/2,
-                  height: MediaQuery.of(context).size.width/2,
+                  width: MediaQuery.of(context).size.width/2.5,
+                  height: MediaQuery.of(context).size.width/2.5,
                 decoration: BoxDecoration(
                   border: Border.all(color: Colors.white, width: 5),
                   shape: BoxShape.circle,
@@ -58,6 +58,7 @@ class _AboutUsState extends State<AboutUs> {
                ),
               _aboutParagraph(),
               logoutButtonBody(context),
+              appVerText(),
               ],
             ),
           ],
@@ -66,10 +67,9 @@ class _AboutUsState extends State<AboutUs> {
     }
   }
 
-// Textfältet för vår about us
-
 Widget _aboutParagraph() {
 return Container(
+  padding: EdgeInsets.only(left: 25.0, right: 25.0, top: 35.0),
     child: RichText(
     text: TextSpan(
      children: <TextSpan>[
@@ -80,37 +80,33 @@ return Container(
           letterSpacing: 1.5,
         ),
        ),
-                     // TextSpan(text: 'bold', style: TextStyle(fontWeight: FontWeight.bold)),
-                     // TextSpan(text: ' Hur får man en paragraf'),
-    ],
+     ],
    ),
- ),
+  ),
  );
 }
 
-
-// Detta använder samma kod som i welcome_view - kan det göras till en mer universiell widget med 
-// texten definierad per button istället för separata knapp-widgets?
-  Widget logoutButtonBody(context) {
-    return Container(
-      child: SizedBox(
-        width: 185,
-        height: 45,
-        child: RaisedButton(
-          elevation: 7.0,
-          textColor: Color.fromARGB(255, 224, 234, 255),
-          child: Text(
-            "Log out",
-            style: TextStyle(fontSize: 15, fontWeight: FontWeight.w600),
+Widget logoutButtonBody(context) {
+  return Container(
+    padding: EdgeInsets.only(top: 35.0),
+    child: SizedBox(
+      width: 185,
+      height: 45,
+      child: RaisedButton(
+        elevation: 7.0,
+        textColor: Color.fromARGB(255, 224, 234, 255),
+        child: Text(
+          "Log out",
+          style: TextStyle(fontSize: 15, fontWeight: FontWeight.w600),
           ),
-          color: Color.fromARGB(255, 107, 90, 100),
-          shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(40.0),
-              side: BorderSide(color: Color.fromARGB(255, 86, 75, 83))),
-          onPressed: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => (WelcomeView())),
+        color: Color.fromARGB(255, 107, 90, 100),
+        shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(40.0),
+            side: BorderSide(color: Color.fromARGB(255, 86, 75, 83))),
+            onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => (WelcomeView())),
                     );
                   },
         ),
@@ -120,5 +116,10 @@ return Container(
 
 Widget appVerText() {
   return Container(
+    alignment: Alignment.bottomCenter,
+    padding: EdgeInsets.only(top: 15.0),
+    child: Text(
+      'APP VER 0.0.0'
+    ),
   );
 }
