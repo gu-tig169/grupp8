@@ -16,14 +16,14 @@ class _PictureViewState extends State<PictureView> {
         Stack(
           children: [
             Container(
-              height: double.maxFinite,
+              height: double.infinity,
               width: double.infinity,
               child: Container( 
                 height: 30.0,
                 child: Image(
                   fit: BoxFit.scaleDown,
                   alignment: Alignment.center,
-                  image: AssetImage('assets/images/chewy3.jpg'), // gör om detta till så att den lyssnar på vilken item den ska visa
+                  image: AssetImage('assets/images/chewy2.jpg'), // gör om detta till så att den lyssnar på vilken item den ska visa
                 ),
               ),
             ),
