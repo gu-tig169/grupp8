@@ -40,7 +40,7 @@ class _PictureViewState extends State<PictureView> {
             Positioned( 
               child: Icon(
                 Icons.circle, 
-                color: Colors.grey[900], // Går inte att lägga in ARGB färgen här. Försöka lösa en variabel på färgen i hexkod
+                color: Color.fromARGB(255, 86, 75, 83),
                 size: 60,
               ),
               bottom: 15,

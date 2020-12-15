@@ -173,6 +173,8 @@ class _HomeScreenState extends State<HomeScreen> {
           bottom: 10
         ),
         child: TextField(
+          style: TextStyle(
+            color: Colors.white),
           textAlignVertical: TextAlignVertical.bottom,
           controller: imageSearch,
           decoration: InputDecoration(
@@ -186,8 +188,9 @@ class _HomeScreenState extends State<HomeScreen> {
               hintStyle: TextStyle(
                 color: Colors.white,
                 fontSize: 20
-              )),
+            )
+          ),
         )
       );
-}
-}
+    } 
+  }
