@@ -60,7 +60,7 @@ class _HomePageState extends State<HomePage> {
               child: Column(
                 children: [
                   SizedBox(
-                    height: 0.0,
+                    height: 5.0,
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -76,7 +76,7 @@ class _HomePageState extends State<HomePage> {
                     ],
                   ),
                   SizedBox(
-                    height: 40,
+                    height: 35,
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -278,7 +278,21 @@ class _HomePageState extends State<HomePage> {
                   return AlertDialog(
                     backgroundColor: Color.fromARGB(255, 86, 75, 83),
                     title: Text(
-                        "Oops! Looks like you forgot your username and/or password!"),
+                        "Oops! Looks like you forgot your username and/or password!",
+                        textAlign: TextAlign.left),
+                    actions: <Widget>[
+                      TextButton(
+                        child: Text(
+                          'Try again',
+                          style: TextStyle(
+                            color: Colors.white,
+                          ),
+                        ),
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                        },
+                      ),
+                    ],
                   );
                 },
               );
