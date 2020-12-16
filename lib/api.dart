@@ -2,8 +2,7 @@ import 'dart:io';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-String apiKey = 'sZlS6tByzXQZ0G8GsXJqoaqRO5ZlV0iymgKK64_tKN8';
-List listOfPhotos = [];
+String apiKey = 'Y_eztk9R60rYLH2HaYE3SD4B3jShJWKpxZY0D00tA1E';
 
 Future<Photo> fetchRandomFeaturedPhoto() async {
   var response = await http.get(
@@ -15,6 +14,17 @@ Future<Photo> fetchRandomFeaturedPhoto() async {
   final responseJson = jsonDecode(response.body);
 
   return Photo.fromJson(responseJson);
+}
+
+Future<List<Photo>> getImages() async {
+  var response = await http.get(
+    'https://api.unsplash.com/photos/random?count=20',
+    headers: {
+      HttpHeaders.authorizationHeader: "Client-ID " + apiKey,
+    },
+  );
+  List jsonData = json.decode(response.body);
+  return jsonData.map((photos) => new Photo.fromJson(photos)).toList();
 }
 
 class Photo {
