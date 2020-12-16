@@ -278,8 +278,10 @@ class _HomePageState extends State<HomePage> {
                   return AlertDialog(
                     backgroundColor: Color.fromARGB(255, 86, 75, 83),
                     title: Text(
-                        "Oops! Looks like you forgot your username and/or password!",
-                        textAlign: TextAlign.left),
+                      "Oops! Looks like you forgot your username and/or password!",
+                      textAlign: TextAlign.left,
+                      style: TextStyle(color: Colors.white),
+                    ),
                     actions: <Widget>[
                       TextButton(
                         child: Text(
