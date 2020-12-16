@@ -31,17 +31,19 @@ class _HomeScreenState extends State<HomeScreen> {
       body: SafeArea(
         child: Container(
           padding: EdgeInsets.all(20.0),
-          child: Column(
-            children: <Widget>[
-              _photoView(),
-              SizedBox(
-                child: _searchImageTextField(),
-                height: 60,
-              ),
-              // Expanded(
-              //   child: _pictureGridView(),
-              // ),
-            ],
+          child: SingleChildScrollView(
+                      child: Column(
+              children: <Widget>[
+                _photoView(),
+                SizedBox(
+                  child: _searchImageTextField(),
+                  height: 60,
+                ),
+                // Expanded(
+                //   child: _pictureGridView(),
+                // ),
+              ],
+            ),
           ),
         ),
       ),

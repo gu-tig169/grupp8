@@ -9,7 +9,7 @@ Future<Photo> fetchRandomFeaturedPhoto() async {
   var response = await http.get(
     'https://api.unsplash.com/photos/random?featured',
     headers: {
-      HttpHeaders.authorizationHeader: "Client-ID" + apiKey,
+      HttpHeaders.authorizationHeader: "Client-ID " + apiKey,
     },
   );
   final responseJson = jsonDecode(response.body);
