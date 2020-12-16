@@ -115,12 +115,18 @@ class _HomeScreenState extends State<HomeScreen> {
             // ),
             Padding(
               padding: const EdgeInsets.only(left: 10, bottom: 10),
-              child: Text(
-                (photo.user),
-                style: TextStyle(
-                  backgroundColor: Colors.black,
-                  color: Colors.white,
-                  fontSize: 17,
+              child: RichText(
+                text: TextSpan(
+                  children: <TextSpan>[
+                    TextSpan(
+                      text: 'By ' + (photo.user),
+                      style: TextStyle(
+                        backgroundColor: Colors.black,
+                        color: Colors.white,
+                        fontSize: 17,
+                      ),
+                    ),
+                  ],
                 ),
               ),
             ),
@@ -129,6 +135,8 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
     );
   }
+
+  
 
   // Widget _pictureGridView() {
   //   return GridView.count(
