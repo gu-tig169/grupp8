@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:grupp_8/api.dart';
 import 'aboutUs_screen.dart';
-import './PictureView.dart';
 import 'api.dart';
 
 class HomeScreen extends StatefulWidget {
