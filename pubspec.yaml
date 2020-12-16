@@ -33,6 +33,7 @@ dependencies:
   http: ^0.12.2
   sliding_up_panel: ^1.0.2
   url_launcher: ^5.7.9
+  like_button: ^1.0.4
 
 dev_dependencies:
   flutter_test:
