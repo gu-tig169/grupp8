@@ -53,7 +53,7 @@ class _HomePageState extends State<HomePage> {
         children: <Widget>[
           KeyboardAvoider(
                       child: SlidingUpPanel(
-              maxHeight: 350,
+              maxHeight: 336,
               minHeight: 0,
               parallaxEnabled: false,
               body: _body(),
