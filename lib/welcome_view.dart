@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 import 'package:flutter/services.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:keyboard_avoider/keyboard_avoider.dart';
 
 import 'home_screen.dart';
 
@@ -50,78 +51,80 @@ class _HomePageState extends State<HomePage> {
       child: Stack(
         alignment: Alignment.topCenter,
         children: <Widget>[
-          SlidingUpPanel(
-            maxHeight: 550,
-            minHeight: 0,
-            parallaxEnabled: false,
-            body: _body(),
-            controller: _pc,
-            panel: Center(
-              child: Column(
-                children: [
-                  SizedBox(
-                    height: 5.0,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      Container(
-                        width: 40,
-                        height: 10,
-                        decoration: BoxDecoration(
-                            color: Color.fromARGB(255, 86, 75, 83),
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(12.0))),
-                      ),
-                    ],
-                  ),
-                  SizedBox(
-                    height: 35,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Expanded(
-                        child: _userNameTextField(),
-                      ),
-                    ],
-                  ),
-                  SizedBox(
-                    height: 30,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Expanded(
-                        child: _passwordTextField(),
-                      ),
-                    ],
-                  ),
-                  SizedBox(
-                    height: 30,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      logInButtonSlider(context),
-                    ],
-                  ),
-                  SizedBox(
-                    height: 35,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      resetPassword(),
-                    ],
-                  ),
-                ],
+          KeyboardAvoider(
+                      child: SlidingUpPanel(
+              maxHeight: 350,
+              minHeight: 0,
+              parallaxEnabled: false,
+              body: _body(),
+              controller: _pc,
+              panel: Center(
+                child: Column(
+                  children: [
+                    SizedBox(
+                      height: 5.0,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Container(
+                          width: 40,
+                          height: 10,
+                          decoration: BoxDecoration(
+                              color: Color.fromARGB(255, 86, 75, 83),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(12.0))),
+                        ),
+                      ],
+                    ),
+                    SizedBox(
+                      height: 35,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Expanded(
+                          child: _userNameTextField(),
+                        ),
+                      ],
+                    ),
+                    SizedBox(
+                      height: 30,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Expanded(
+                          child: _passwordTextField(),
+                        ),
+                      ],
+                    ),
+                    SizedBox(
+                      height: 30,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        logInButtonSlider(context),
+                      ],
+                    ),
+                    SizedBox(
+                      height: 35,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        resetPassword(),
+                      ],
+                    ),
+                  ],
+                ),
               ),
+              borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(18.0),
+                  topRight: Radius.circular(18.0)),
+              color: Color.fromARGB(255, 172, 171, 173),
             ),
-            borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(18.0),
-                topRight: Radius.circular(18.0)),
-            color: Color.fromARGB(255, 172, 171, 173),
           ),
         ],
       ),
