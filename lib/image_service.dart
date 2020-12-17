@@ -2,7 +2,7 @@ import 'dart:io';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-String apiKey = 'Y_eztk9R60rYLH2HaYE3SD4B3jShJWKpxZY0D00tA1E';
+String apiKey = 'jAqnxNTNnSEKikg3SA6VMuWrVgxCjKKI8PS7S7D8FeY';
 
 Future<Photo> fetchRandomFeaturedPhoto() async {
   var response = await http.get(

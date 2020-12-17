@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:grupp_8/api.dart';
+import 'package:grupp_8/image_service.dart';
 import 'aboutUs_screen.dart';
-import 'api.dart';
+import 'image_service.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -21,13 +21,13 @@ class _HomeScreenState extends State<HomeScreen> {
           child: SingleChildScrollView(
             child: Column(
               children: <Widget>[
-                _photoView(),
+                _futureFeaturedPhotoBuilder(),
                 SizedBox(
                   child: _searchImageTextField(),
                   height: 60,
                 ),
                 Container(
-                  child: _photoListView(),
+                  child: _futureListViewBuilder(),
                   height: 400,
                   width: double.infinity,
                 )
@@ -60,15 +60,37 @@ class _HomeScreenState extends State<HomeScreen> {
         ]);
   }
 
-  Widget _photoView() {
+  Widget _futureFeaturedPhotoBuilder() {
     return FutureBuilder<Photo>(
         future: fetchRandomFeaturedPhoto(),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             return _topImage(snapshot.data);
+          } else if (snapshot.hasError) {
+            return Text("${snapshot.error}");
           }
-          return _topImage(new Photo());
+          return loadingIndicator();
         });
+  }
+
+  Widget loadingIndicator() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: <Widget>[
+        Center(
+          child: Container(
+            height: 20,
+            width: 20,
+            margin: EdgeInsets.all(5),
+            child: CircularProgressIndicator(
+              strokeWidth: 2.0,
+              valueColor: AlwaysStoppedAnimation(Colors.white),
+            ),
+          ),
+        ),
+      ],
+    );
   }
 
   Widget _topImage(Photo photo) {
@@ -107,14 +129,16 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  Widget _photoListView() {
+  Widget _futureListViewBuilder() {
     return FutureBuilder<List<Photo>>(
         future: getImages(),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             return _listViewBuilder(snapshot.data);
+          } else if (snapshot.hasError) {
+            return Text("${snapshot.error}");
           }
-          return _listViewBuilder([]);
+          return loadingIndicator();
         });
   }
 
