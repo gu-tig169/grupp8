@@ -3,6 +3,8 @@ import 'package:grupp_8/image_service.dart';
 import 'aboutUs_screen.dart';
 import 'image_service.dart';
 
+final TextEditingController imageSearch = new TextEditingController();
+
 class HomeScreen extends StatefulWidget {
   @override
   _HomeScreenState createState() => _HomeScreenState();
@@ -11,7 +13,6 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   ScrollController _scrollController = new ScrollController();
   List<Photo> photoList = [];
-  final TextEditingController imageSearch = new TextEditingController();
 
   @override
   void initState() {
@@ -25,7 +26,7 @@ class _HomeScreenState extends State<HomeScreen> {
     if (notification is ScrollUpdateNotification) {
       if (_scrollController.position.pixels ==
           _scrollController.position.maxScrollExtent) {
-        print('End Scroll');
+        print('Loading more pics...');
         GetPhotos().fetchPhotos().then((value) {
           setState(() {
             photoList.addAll(value);
@@ -44,51 +45,174 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Color.fromARGB(255, 86, 75, 83),
-      appBar: _appBar(),
-      body: SafeArea(
-        child: Container(
-          child: SingleChildScrollView(
-            child: Column(
-              children: <Widget>[
-                _futureFeaturedPhotoBuilder(),
-                SizedBox(
-                  child: _searchImageTextField(),
-                  height: 60,
-                ),
-                SizedBox(
-                  child: _imageListView(),
-                  height: 370,
-                  width: double.infinity,
-                )
-              ],
-            ),
+    return SafeArea(
+      child: Material(
+        child: NotificationListener(
+          onNotification: onNotification,
+          child: CustomScrollView(
+            controller: _scrollController,
+            slivers: [
+              SliverPersistentHeader(
+                delegate: MySliverAppBar(expandedHeight: 350),
+                pinned: true,
+              ),
+              _imageListView(),
+            ],
           ),
         ),
       ),
     );
   }
 
-  Widget _appBar() {
-    return AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        leading: GestureDetector(
-          child: Icon(Icons.info, color: Colors.white),
-          onTap: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => (AboutUs())),
-            );
-          },
-        ),
-        actions: <Widget>[
-          IconButton(
-            icon: Icon(Icons.person, color: Colors.white),
-            onPressed: () {},
+  Widget _imageListView() {
+    return _listViewBuilder();
+    // if (photoList.isNotEmpty) {
+    //   return _listViewBuilder();
+    // }
+    // return loadingIndicator();
+  }
+
+  Widget _listViewBuilder() {
+    return SliverList(
+      delegate: SliverChildBuilderDelegate(
+        (context, index) {
+          return Column(
+            children: <Widget>[
+              Container(
+                  width: double.infinity,
+                  child: Card(
+                    child: Image.network(photoList[index].photoUrl),
+                  ))
+            ],
+          );
+        },
+        childCount: photoList.length,
+      ),
+    );
+  }
+
+  //   [
+  //   Column(
+  //     children: <Widget>[
+  //       Container(
+  //         width: double.infinity,
+  //         child: ListView.builder(
+  //           controller: _scrollController,
+  //           itemCount: photoList.length,
+  //           itemBuilder: (context, index) {
+  //             return Card(
+  //                 child: Image.network(photoList[index].photoUrl));
+  //           },
+  //         ),
+  //       ),
+  //     ],
+  //   ),
+  // ],
+
+  // Widget loadingIndicator() {
+  //   return Column(
+  //     crossAxisAlignment: CrossAxisAlignment.center,
+  //     mainAxisAlignment: MainAxisAlignment.center,
+  //     children: <Widget>[
+  //       Center(
+  //         child: Container(
+  //           height: 20,
+  //           width: 20,
+  //           margin: EdgeInsets.all(5),
+  //           child: CircularProgressIndicator(
+  //             strokeWidth: 2.0,
+  //             valueColor: AlwaysStoppedAnimation(Colors.white),
+  //           ),
+  //         ),
+  //       ),
+  //     ],
+  //   );
+  // }
+}
+
+class MySliverAppBar extends SliverPersistentHeaderDelegate {
+  final double expandedHeight;
+
+  MySliverAppBar({@required this.expandedHeight});
+
+  @override
+  Widget build(
+      BuildContext context, double shrinkOffset, bool overlapsContent) {
+    return Stack(
+      fit: StackFit.expand,
+      overflow: Overflow.visible,
+      children: [
+        Container(
+          child: Container(
+            width: double.infinity,
+            color: Color.fromARGB(255, 86, 75, 83),
           ),
-        ]);
+        ),
+        Positioned(
+          top: -shrinkOffset,
+          child: IconButton(
+              icon: Icon(Icons.info, color: Colors.white),
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => (AboutUs())),
+                );
+              }),
+        ),
+        Positioned(
+          top: 14 - shrinkOffset,
+          right: 90,
+          child: _logoText(),
+        ),
+        Positioned(
+          top: -shrinkOffset,
+          right: 0,
+          child: IconButton(
+              icon: Icon(Icons.person, color: Colors.white), onPressed: () {}),
+        ),
+        Column(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            Container(
+              child: _searchImageTextField(),
+            ),
+          ],
+        ),
+        Positioned(
+          top: 50 - shrinkOffset,
+          width: MediaQuery.of(context).size.width,
+          child: Opacity(
+            opacity: (1 - shrinkOffset / expandedHeight),
+            child: Card(
+              child: _testPhoto(),
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+
+  @override
+  double get maxExtent => expandedHeight;
+
+  @override
+  double get minExtent => kToolbarHeight;
+
+  @override
+  bool shouldRebuild(SliverPersistentHeaderDelegate oldDelegate) => true;
+
+  Widget _testPhoto() {
+    return Container(
+      width: double.infinity,
+      height: 230,
+      decoration: BoxDecoration(
+        image: DecorationImage(
+          image: NetworkImage(
+              "https://images.pexels.com/photos/396547/pexels-photo-396547.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"),
+          fit: BoxFit.cover,
+        ),
+      ),
+    );
   }
 
   Widget _futureFeaturedPhotoBuilder() {
@@ -160,86 +284,40 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  Widget _imageListView() {
-    if (photoList.isNotEmpty) {
-      return _listViewBuilder(photoList);
-    }
-    return loadingIndicator();
-  }
-
-  Widget _listViewBuilder(List<Photo> list) {
-    return NotificationListener(
-      onNotification: onNotification,
-      child: Center(
-          child: ListView.builder(
-              controller: _scrollController,
-              itemCount: photoList.length,
-              itemBuilder: (context, index) {
-                return Card(child: Image.network(photoList[index].photoUrl));
-              })),
+  Widget _searchImageTextField() {
+    return Container(
+      height: 40,
+      margin: EdgeInsets.only(bottom: 10, right: 10, left: 10),
+      child: TextField(
+        style: TextStyle(color: Colors.white),
+        textAlignVertical: TextAlignVertical.bottom,
+        controller: imageSearch,
+        decoration: InputDecoration(
+            prefixIcon: Icon(Icons.search, color: Colors.white),
+            focusedBorder: OutlineInputBorder(
+                borderSide: BorderSide(color: Colors.white30, width: 2)),
+            enabledBorder: OutlineInputBorder(
+                borderSide: BorderSide(color: Colors.white30, width: 2)),
+            hintText: "Search..",
+            hintStyle: TextStyle(color: Colors.white, fontSize: 20)),
+      ),
     );
   }
 
-  Widget _searchImageTextField() {
-    return Container(
-        margin: EdgeInsets.only(left: 1, right: 1, top: 10, bottom: 10),
-        child: TextField(
-          style: TextStyle(color: Colors.white),
-          textAlignVertical: TextAlignVertical.bottom,
-          controller: imageSearch,
-          decoration: InputDecoration(
-              prefixIcon: Icon(Icons.search, color: Colors.white),
-              focusedBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: Colors.white30, width: 2)),
-              enabledBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: Colors.white30, width: 2)),
-              hintText: "Search..",
-              hintStyle: TextStyle(color: Colors.white, fontSize: 20)),
-        ));
+  Widget _logoText() {
+    return Text(
+      'PLENTY OF PICS',
+      style: TextStyle(
+          // shadows: <Shadow>[
+          //   Shadow(
+          //     offset: Offset(1.0, 1.0),
+          //     blurRadius: 3.0,
+          //     color: Color.fromARGB(255, 0, 0, 0),
+          //   )
+          // ],
+          color: Color.fromARGB(255, 225, 255, 255),
+          fontSize: 22,
+          fontFamily: "Syncopate"),
+    );
   }
 }
-
-// Widget _pictureGridView() {
-//   return GridView.count(
-//     crossAxisCount: 2,
-//     crossAxisSpacing: 10,
-//     mainAxisSpacing: 10,
-//     children: _listItem
-//         .map(
-//           (item) => GestureDetector(
-//             onTap: () {
-//               Navigator.push(
-//                 context,
-//                 MaterialPageRoute(
-//                     builder: (context) =>
-//                         (PictureView())), // Visar enbart en bild nu, som är förvald
-//               );
-//               print('You have pressed a picture');
-//             },
-//             child: Card(
-//               color: Colors.transparent,
-//               elevation: 0,
-//               child: Container(
-//                 decoration: BoxDecoration(
-//                   borderRadius: BorderRadius.circular(20),
-//                   image: DecorationImage(
-//                       image: AssetImage(item), fit: BoxFit.cover),
-//                 ),
-//                 child: Transform.translate(
-//                   offset: Offset(65, -65),
-//                   child: Container(
-//                     margin:
-//                         EdgeInsets.symmetric(horizontal: 64, vertical: 64),
-//                     child: IconButton(
-//                       icon: Icon(Icons.favorite_border, color: Colors.black),
-//                       onPressed: () {},
-//                     ),
-//                   ),
-//                 ),
-//               ),
-//             ),
-//           ),
-//         )
-//         .toList(),
-//   );
-// }
