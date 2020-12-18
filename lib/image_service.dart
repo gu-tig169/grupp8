@@ -2,7 +2,7 @@ import 'dart:io';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-String apiKey = 'jAqnxNTNnSEKikg3SA6VMuWrVgxCjKKI8PS7S7D8FeY';
+String apiKey = 'QM7rfeVBnVQKCSdSD2iL5yC8qt80lWstn6glQXqoFR0';
 
 Future<Photo> fetchRandomFeaturedPhoto() async {
   var response = await http.get(
@@ -11,20 +11,31 @@ Future<Photo> fetchRandomFeaturedPhoto() async {
       HttpHeaders.authorizationHeader: "Client-ID " + apiKey,
     },
   );
-  final responseJson = jsonDecode(response.body);
 
-  return Photo.fromJson(responseJson);
+  if (response.statusCode == 200) {
+    final responseJson = jsonDecode(response.body);
+    return Photo.fromJson(responseJson);
+  } else {
+    throw Exception('Failed to load images');
+  }
 }
 
-Future<List<Photo>> getImages() async {
-  var response = await http.get(
-    'https://api.unsplash.com/photos/random?count=20',
-    headers: {
-      HttpHeaders.authorizationHeader: "Client-ID " + apiKey,
-    },
-  );
-  List jsonData = json.decode(response.body);
-  return jsonData.map((photos) => new Photo.fromJson(photos)).toList();
+class GetPhotos {
+  Future<List<Photo>> fetchPhotos() async {
+    final response = await http.get(
+      'https://api.unsplash.com/photos/random?count=5',
+      headers: {
+        HttpHeaders.authorizationHeader: "Client-ID " + apiKey,
+      },
+    );
+    if (response.statusCode == 200) {
+      var json = jsonDecode(response.body);
+      List data = json;
+      return data.map((photo) => new Photo.fromJson(photo)).toList();
+    } else {
+      throw Exception('Failed to load list of images');
+    }
+  }
 }
 
 class Photo {
