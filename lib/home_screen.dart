@@ -8,9 +8,40 @@ class HomeScreen extends StatefulWidget {
   _HomeScreenState createState() => _HomeScreenState();
 }
 
-final TextEditingController imageSearch = new TextEditingController();
-
 class _HomeScreenState extends State<HomeScreen> {
+  ScrollController _scrollController = new ScrollController();
+  List<Photo> photoList = [];
+  final TextEditingController imageSearch = new TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    GetPhotos().fetchPhotos().then((value) => setState(() {
+          photoList.addAll(value);
+        }));
+  }
+
+  bool onNotification(ScrollNotification notification) {
+    if (notification is ScrollUpdateNotification) {
+      if (_scrollController.position.pixels ==
+          _scrollController.position.maxScrollExtent) {
+        print('End Scroll');
+        GetPhotos().fetchPhotos().then((value) {
+          setState(() {
+            photoList.addAll(value);
+          });
+        });
+      }
+    }
+    return true;
+  }
+
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,9 +57,9 @@ class _HomeScreenState extends State<HomeScreen> {
                   child: _searchImageTextField(),
                   height: 60,
                 ),
-                Container(
-                  child: _futureListViewBuilder(),
-                  height: 400,
+                SizedBox(
+                  child: _imageListView(),
+                  height: 370,
                   width: double.infinity,
                 )
               ],
@@ -129,48 +160,43 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  Widget _futureListViewBuilder() {
-    return FutureBuilder<List<Photo>>(
-        future: getImages(),
-        builder: (context, snapshot) {
-          if (snapshot.hasData) {
-            return _listViewBuilder(snapshot.data);
-          } else if (snapshot.hasError) {
-            return Text("${snapshot.error}");
-          }
-          return loadingIndicator();
-        });
+  Widget _imageListView() {
+    if (photoList.isNotEmpty) {
+      return _listViewBuilder(photoList);
+    }
+    return loadingIndicator();
   }
 
   Widget _listViewBuilder(List<Photo> list) {
-    return ListView.builder(
-      itemCount: list == null ? 0 : list.length,
-      itemBuilder: (context, index) {
-        return Image.network(
-          list[index].photoUrl,
-          fit: BoxFit.cover,
-        );
-      },
+    return NotificationListener(
+      onNotification: onNotification,
+      child: Center(
+          child: ListView.builder(
+              controller: _scrollController,
+              itemCount: photoList.length,
+              itemBuilder: (context, index) {
+                return Card(child: Image.network(photoList[index].photoUrl));
+              })),
     );
   }
-}
 
-Widget _searchImageTextField() {
-  return Container(
-      margin: EdgeInsets.only(left: 1, right: 1, top: 10, bottom: 10),
-      child: TextField(
-        style: TextStyle(color: Colors.white),
-        textAlignVertical: TextAlignVertical.bottom,
-        controller: imageSearch,
-        decoration: InputDecoration(
-            prefixIcon: Icon(Icons.search, color: Colors.white),
-            focusedBorder: OutlineInputBorder(
-                borderSide: BorderSide(color: Colors.white30, width: 2)),
-            enabledBorder: OutlineInputBorder(
-                borderSide: BorderSide(color: Colors.white30, width: 2)),
-            hintText: "Search..",
-            hintStyle: TextStyle(color: Colors.white, fontSize: 20)),
-      ));
+  Widget _searchImageTextField() {
+    return Container(
+        margin: EdgeInsets.only(left: 1, right: 1, top: 10, bottom: 10),
+        child: TextField(
+          style: TextStyle(color: Colors.white),
+          textAlignVertical: TextAlignVertical.bottom,
+          controller: imageSearch,
+          decoration: InputDecoration(
+              prefixIcon: Icon(Icons.search, color: Colors.white),
+              focusedBorder: OutlineInputBorder(
+                  borderSide: BorderSide(color: Colors.white30, width: 2)),
+              enabledBorder: OutlineInputBorder(
+                  borderSide: BorderSide(color: Colors.white30, width: 2)),
+              hintText: "Search..",
+              hintStyle: TextStyle(color: Colors.white, fontSize: 20)),
+        ));
+  }
 }
 
 // Widget _pictureGridView() {
