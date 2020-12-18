@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:grupp_8/image_service.dart';
-import 'aboutUs_screen.dart';
+import 'about_us_screen.dart';
 import 'image_service.dart';
-
-final TextEditingController imageSearch = new TextEditingController();
+import 'loader_indicators.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -13,6 +12,7 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   ScrollController _scrollController = new ScrollController();
   List<Photo> photoList = [];
+  Future<Photo> featuredPhoto;
 
   @override
   void initState() {
@@ -20,12 +20,15 @@ class _HomeScreenState extends State<HomeScreen> {
     GetPhotos().fetchPhotos().then((value) => setState(() {
           photoList.addAll(value);
         }));
+    featuredPhoto = fetchRandomFeaturedPhoto();
   }
 
   bool onNotification(ScrollNotification notification) {
     if (notification is ScrollUpdateNotification) {
-      if (_scrollController.position.pixels ==
-          _scrollController.position.maxScrollExtent) {
+      var triggerFetchMoreSize =
+          0.8 * _scrollController.position.maxScrollExtent;
+
+      if (_scrollController.position.pixels > triggerFetchMoreSize) {
         print('Loading more pics...');
         GetPhotos().fetchPhotos().then((value) {
           setState(() {
@@ -53,7 +56,8 @@ class _HomeScreenState extends State<HomeScreen> {
             controller: _scrollController,
             slivers: [
               SliverPersistentHeader(
-                delegate: MySliverAppBar(expandedHeight: 350),
+                delegate: MySliverAppBar(
+                    expandedHeight: 350, featuredPhoto: featuredPhoto),
                 pinned: true,
               ),
               _imageListView(),
@@ -65,11 +69,10 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Widget _imageListView() {
-    return _listViewBuilder();
-    // if (photoList.isNotEmpty) {
-    //   return _listViewBuilder();
-    // }
-    // return loadingIndicator();
+    if (photoList.isNotEmpty) {
+      return _listViewBuilder();
+    }
+    return sliverLoaderIndicator();
   }
 
   Widget _listViewBuilder() {
@@ -90,50 +93,14 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
     );
   }
-
-  //   [
-  //   Column(
-  //     children: <Widget>[
-  //       Container(
-  //         width: double.infinity,
-  //         child: ListView.builder(
-  //           controller: _scrollController,
-  //           itemCount: photoList.length,
-  //           itemBuilder: (context, index) {
-  //             return Card(
-  //                 child: Image.network(photoList[index].photoUrl));
-  //           },
-  //         ),
-  //       ),
-  //     ],
-  //   ),
-  // ],
-
-  // Widget loadingIndicator() {
-  //   return Column(
-  //     crossAxisAlignment: CrossAxisAlignment.center,
-  //     mainAxisAlignment: MainAxisAlignment.center,
-  //     children: <Widget>[
-  //       Center(
-  //         child: Container(
-  //           height: 20,
-  //           width: 20,
-  //           margin: EdgeInsets.all(5),
-  //           child: CircularProgressIndicator(
-  //             strokeWidth: 2.0,
-  //             valueColor: AlwaysStoppedAnimation(Colors.white),
-  //           ),
-  //         ),
-  //       ),
-  //     ],
-  //   );
-  // }
 }
 
 class MySliverAppBar extends SliverPersistentHeaderDelegate {
   final double expandedHeight;
+  final Future<Photo> featuredPhoto;
+  final TextEditingController imageSearch = new TextEditingController();
 
-  MySliverAppBar({@required this.expandedHeight});
+  MySliverAppBar({@required this.expandedHeight, @required this.featuredPhoto});
 
   @override
   Widget build(
@@ -184,7 +151,7 @@ class MySliverAppBar extends SliverPersistentHeaderDelegate {
           child: Opacity(
             opacity: (1 - shrinkOffset / expandedHeight),
             child: Card(
-              child: _testPhoto(),
+              child: _futureFeaturedPhotoBuilder(featuredPhoto),
             ),
           ),
         ),
@@ -201,23 +168,9 @@ class MySliverAppBar extends SliverPersistentHeaderDelegate {
   @override
   bool shouldRebuild(SliverPersistentHeaderDelegate oldDelegate) => true;
 
-  Widget _testPhoto() {
-    return Container(
-      width: double.infinity,
-      height: 230,
-      decoration: BoxDecoration(
-        image: DecorationImage(
-          image: NetworkImage(
-              "https://images.pexels.com/photos/396547/pexels-photo-396547.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"),
-          fit: BoxFit.cover,
-        ),
-      ),
-    );
-  }
-
-  Widget _futureFeaturedPhotoBuilder() {
+  Widget _futureFeaturedPhotoBuilder(Future<Photo> featuredPhoto) {
     return FutureBuilder<Photo>(
-        future: fetchRandomFeaturedPhoto(),
+        future: featuredPhoto,
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             return _topImage(snapshot.data);
@@ -226,26 +179,6 @@ class MySliverAppBar extends SliverPersistentHeaderDelegate {
           }
           return loadingIndicator();
         });
-  }
-
-  Widget loadingIndicator() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.center,
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: <Widget>[
-        Center(
-          child: Container(
-            height: 20,
-            width: 20,
-            margin: EdgeInsets.all(5),
-            child: CircularProgressIndicator(
-              strokeWidth: 2.0,
-              valueColor: AlwaysStoppedAnimation(Colors.white),
-            ),
-          ),
-        ),
-      ],
-    );
   }
 
   Widget _topImage(Photo photo) {
@@ -270,7 +203,7 @@ class MySliverAppBar extends SliverPersistentHeaderDelegate {
             Padding(
               padding: const EdgeInsets.only(left: 10, bottom: 10),
               child: Text(
-                (photo.user.toUpperCase()),
+                ('By: ' + photo.user),
                 style: TextStyle(
                   backgroundColor: Colors.black,
                   color: Colors.white,
@@ -308,13 +241,6 @@ class MySliverAppBar extends SliverPersistentHeaderDelegate {
     return Text(
       'PLENTY OF PICS',
       style: TextStyle(
-          // shadows: <Shadow>[
-          //   Shadow(
-          //     offset: Offset(1.0, 1.0),
-          //     blurRadius: 3.0,
-          //     color: Color.fromARGB(255, 0, 0, 0),
-          //   )
-          // ],
           color: Color.fromARGB(255, 225, 255, 255),
           fontSize: 22,
           fontFamily: "Syncopate"),

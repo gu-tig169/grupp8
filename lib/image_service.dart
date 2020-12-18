@@ -16,7 +16,7 @@ Future<Photo> fetchRandomFeaturedPhoto() async {
     final responseJson = jsonDecode(response.body);
     return Photo.fromJson(responseJson);
   } else {
-    throw Exception('Failed to load images');
+    throw Exception('Failed to load image');
   }
 }
 
