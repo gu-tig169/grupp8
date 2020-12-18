@@ -11,7 +11,7 @@ class _AboutUsState extends State<AboutUs> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromARGB(255, 86, 75, 83),
+      backgroundColor: Color.fromARGB(255, 49, 41, 47),
       appBar: AppBar(
         elevation: 0.0,
         backgroundColor: Colors.transparent,
@@ -59,14 +59,27 @@ class _AboutUsState extends State<AboutUs> {
                   color: Colors.white,
                   image: DecorationImage(
                     fit: BoxFit.cover,
-                    image: AssetImage('assets/images/chewy1.jpg'),
+                    image: AssetImage('assets/images/grupp8.png'),
                   ),
                 ),
               ),
               _aboutParagraph(),
-              logoutButtonBody(context),
-              appVerText(),
             ],
+          ),
+          Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 10),
+                  child: logoutButton(context),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 20),
+                  child: appVerText(),
+                ),
+              ],
+            ),
           ),
         ],
       ),
@@ -81,10 +94,9 @@ Widget _aboutParagraph() {
       text: TextSpan(
         children: <TextSpan>[
           TextSpan(
-            text:
-                'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. ',
+            text: 'Vi är grupp 8 och vi är best flutter grupp.',
             style: TextStyle(
-              fontSize: 18.0,
+              fontSize: 16.0,
               letterSpacing: 1.5,
             ),
           ),
@@ -94,7 +106,7 @@ Widget _aboutParagraph() {
   );
 }
 
-Widget logoutButtonBody(context) {
+Widget logoutButton(context) {
   return Container(
     padding: EdgeInsets.only(top: 35.0),
     child: SizedBox(
@@ -126,6 +138,9 @@ Widget appVerText() {
   return Container(
     alignment: Alignment.bottomCenter,
     padding: EdgeInsets.only(top: 15.0),
-    child: Text('APP VER 0.0.0'),
+    child: Text(
+      'Version: 0.1.5-alpha',
+      style: TextStyle(fontSize: 12),
+    ),
   );
 }

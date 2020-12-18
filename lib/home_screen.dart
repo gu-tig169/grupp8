@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:grupp_8/image_service.dart';
 import 'about_us_screen.dart';
@@ -57,7 +59,7 @@ class _HomeScreenState extends State<HomeScreen> {
             slivers: [
               SliverPersistentHeader(
                 delegate: MySliverAppBar(
-                    expandedHeight: 350, featuredPhoto: featuredPhoto),
+                    expandedHeight: 345, featuredPhoto: featuredPhoto),
                 pinned: true,
               ),
               _imageListView(),
@@ -82,10 +84,12 @@ class _HomeScreenState extends State<HomeScreen> {
           return Column(
             children: <Widget>[
               Container(
+                  decoration: BoxDecoration(
+                      border: Border(
+                          bottom: BorderSide(
+                              color: Colors.grey.shade100, width: 1.5))),
                   width: double.infinity,
-                  child: Card(
-                    child: Image.network(photoList[index].photoUrl),
-                  ))
+                  child: Image.network(photoList[index].photoUrl))
             ],
           );
         },
@@ -112,7 +116,7 @@ class MySliverAppBar extends SliverPersistentHeaderDelegate {
         Container(
           child: Container(
             width: double.infinity,
-            color: Color.fromARGB(255, 86, 75, 83),
+            color: Color.fromARGB(255, 49, 41, 47),
           ),
         ),
         Positioned(
@@ -137,22 +141,25 @@ class MySliverAppBar extends SliverPersistentHeaderDelegate {
           child: IconButton(
               icon: Icon(Icons.person, color: Colors.white), onPressed: () {}),
         ),
-        Column(
-          mainAxisAlignment: MainAxisAlignment.end,
-          children: [
-            Container(
-              child: _searchImageTextField(),
-            ),
-          ],
-        ),
         Positioned(
           top: 50 - shrinkOffset,
           width: MediaQuery.of(context).size.width,
           child: Opacity(
             opacity: (1 - shrinkOffset / expandedHeight),
-            child: Card(
-              child: _futureFeaturedPhotoBuilder(featuredPhoto),
-            ),
+            child: _futureFeaturedPhotoBuilder(featuredPhoto),
+          ),
+        ),
+        Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(bottom: 8.0),
+                child: Container(
+                  child: _searchImageTextField(),
+                ),
+              ),
+            ],
           ),
         ),
       ],
@@ -184,17 +191,26 @@ class MySliverAppBar extends SliverPersistentHeaderDelegate {
   Widget _topImage(Photo photo) {
     return Container(
       width: double.infinity,
-      height: 210,
+      height: 239,
       decoration: BoxDecoration(
         image: DecorationImage(
             image: NetworkImage(photo.photoUrl), fit: BoxFit.cover),
       ),
       child: Container(
         decoration: BoxDecoration(
-          gradient: LinearGradient(begin: Alignment.bottomRight, colors: [
-            Colors.black.withOpacity(.4),
-            Colors.black.withOpacity(.2),
-          ]),
+          gradient: LinearGradient(
+              begin: Alignment.bottomCenter,
+              end: Alignment.center,
+              stops: [
+                0.1,
+                0.16,
+                0.3
+              ],
+              colors: [
+                Colors.black.withOpacity(0.4),
+                Colors.black.withOpacity(0.3),
+                Colors.black.withOpacity(0),
+              ]),
         ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.end,
@@ -203,11 +219,10 @@ class MySliverAppBar extends SliverPersistentHeaderDelegate {
             Padding(
               padding: const EdgeInsets.only(left: 10, bottom: 10),
               child: Text(
-                ('By: ' + photo.user),
+                ('Photo by ' + photo.user),
                 style: TextStyle(
-                  backgroundColor: Colors.black,
                   color: Colors.white,
-                  fontSize: 17,
+                  fontSize: 16,
                 ),
               ),
             ),
@@ -220,19 +235,29 @@ class MySliverAppBar extends SliverPersistentHeaderDelegate {
   Widget _searchImageTextField() {
     return Container(
       height: 40,
-      margin: EdgeInsets.only(bottom: 10, right: 10, left: 10),
+      margin: EdgeInsets.only(left: 15, right: 15),
       child: TextField(
-        style: TextStyle(color: Colors.white),
-        textAlignVertical: TextAlignVertical.bottom,
+        style: TextStyle(color: Colors.white70),
+        cursorColor: Color.fromARGB(255, 107, 90, 100),
+        textAlignVertical: TextAlignVertical.center,
+        textAlign: TextAlign.left,
         controller: imageSearch,
         decoration: InputDecoration(
-            prefixIcon: Icon(Icons.search, color: Colors.white),
-            focusedBorder: OutlineInputBorder(
-                borderSide: BorderSide(color: Colors.white30, width: 2)),
-            enabledBorder: OutlineInputBorder(
-                borderSide: BorderSide(color: Colors.white30, width: 2)),
-            hintText: "Search..",
-            hintStyle: TextStyle(color: Colors.white, fontSize: 20)),
+          contentPadding: const EdgeInsets.symmetric(vertical: 0),
+          prefixIcon: Icon(Icons.search, color: Colors.white70),
+          border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(10),
+              borderSide: BorderSide(
+                width: 0,
+                style: BorderStyle.none,
+              )),
+          fillColor: Color.fromARGB(60, 118, 118, 128),
+          filled: true,
+          hintText: "Search photo...",
+          hintStyle: TextStyle(
+            color: Colors.white70,
+          ),
+        ),
       ),
     );
   }
