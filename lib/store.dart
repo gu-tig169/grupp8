@@ -28,7 +28,6 @@ class PhotoStore extends ChangeNotifier {
   }
 
   void callGetPhotos() {
-    isLoading = true;
     GetPhotos()
         .fetchPhotos(imageSearch.text, PhotoStore().pageCounter)
         .then((value) => {
