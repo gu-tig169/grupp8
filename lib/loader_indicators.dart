@@ -29,11 +29,7 @@ Widget sliverLoaderIndicator() {
       (context, index) {
         return Column(
           children: <Widget>[
-            Container(
-                width: double.infinity,
-                child: Card(
-                  child: loadingIndicator(),
-                ))
+            Container(width: double.infinity, child: loadingIndicator())
           ],
         );
       },
