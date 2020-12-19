@@ -5,10 +5,7 @@ import 'about_us_screen.dart';
 import 'image_service.dart';
 import 'loader_indicators.dart';
 import 'photo.dart';
-
-final TextEditingController imageSearch = new TextEditingController();
-List<Photo> photoList = [];
-int pageCounter = 1;
+import 'store.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -22,11 +19,10 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     super.initState();
-    GetPhotos()
-        .fetchPhotos(imageSearch.text, pageCounter)
-        .then((value) => setState(() {
-              photoList.addAll(value);
-            }));
+    PhotoStore().addListener(() {
+      setState(() {});
+    });
+    PhotoStore().callGetPhotos();
     featuredPhoto = fetchRandomFeaturedPhoto();
   }
 
@@ -34,16 +30,8 @@ class _HomeScreenState extends State<HomeScreen> {
     if (notification is ScrollUpdateNotification) {
       if (_scrollController.position.pixels ==
           _scrollController.position.maxScrollExtent) {
-        // var triggerFetchMoreSize =
-        //     0.8 * _scrollController.position.maxScrollExtent;
-        // if (_scrollController.position.pixels > triggerFetchMoreSize) {
-        print('Loading more pics...');
-        pageCounter = pageCounter + 1;
-        GetPhotos().fetchPhotos(imageSearch.text, pageCounter).then((value) {
-          setState(() {
-            photoList.addAll(value);
-          });
-        });
+        PhotoStore().incrementPageCounter();
+        PhotoStore().callGetPhotos();
       }
     }
     return true;
@@ -78,7 +66,9 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Widget _imageListView() {
-    if (photoList.isNotEmpty) {
+    if (PhotoStore().photoList.isEmpty && !PhotoStore().isLoading) {
+      return noResultSliverLoaderIndicator();
+    } else if (PhotoStore().photoList.isNotEmpty && !PhotoStore().isLoading) {
       return _listViewBuilder();
     }
     return sliverLoaderIndicator();
@@ -96,11 +86,11 @@ class _HomeScreenState extends State<HomeScreen> {
                           bottom: BorderSide(
                               color: Colors.grey.shade100, width: 1.5))),
                   width: double.infinity,
-                  child: Image.network(photoList[index].photoUrl))
+                  child: Image.network(PhotoStore().photoList[index].photoUrl))
             ],
           );
         },
-        childCount: photoList.length,
+        childCount: PhotoStore().photoList.length,
       ),
     );
   }
@@ -247,14 +237,9 @@ class MySliverAppBar extends SliverPersistentHeaderDelegate {
           child: TextField(
             textInputAction: TextInputAction.search,
             onSubmitted: (value) {
-              photoList.clear();
-              GetPhotos()
-                  .fetchPhotos(imageSearch.text, pageCounter)
-                  .then((value) {
-                photoList.addAll(value);
-              });
-              pageCounter = 1;
-              print("search");
+              PhotoStore().resetPageCounter();
+              PhotoStore().clearPhotoList();
+              PhotoStore().callGetPhotos();
             },
             style: TextStyle(color: Colors.white70),
             cursorColor: Color.fromARGB(255, 107, 90, 100),

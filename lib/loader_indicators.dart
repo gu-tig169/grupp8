@@ -41,3 +41,40 @@ Widget sliverLoaderIndicator() {
     ),
   );
 }
+
+Widget noResultIndicator() {
+  return Container(
+    height: 200,
+    child: Column(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: <Widget>[
+        Center(
+          child: Container(
+            margin: EdgeInsets.all(5),
+            child: Text('No search results found'),
+          ),
+        ),
+      ],
+    ),
+  );
+}
+
+Widget noResultSliverLoaderIndicator() {
+  return SliverList(
+    delegate: SliverChildBuilderDelegate(
+      (context, index) {
+        return Column(
+          children: <Widget>[
+            Container(
+                width: double.infinity,
+                child: Card(
+                  child: noResultIndicator(),
+                ))
+          ],
+        );
+      },
+      childCount: 1,
+    ),
+  );
+}
