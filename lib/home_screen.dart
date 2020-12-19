@@ -1,10 +1,14 @@
 import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:grupp_8/image_service.dart';
 import 'about_us_screen.dart';
 import 'image_service.dart';
 import 'loader_indicators.dart';
+import 'photo.dart';
+
+final TextEditingController imageSearch = new TextEditingController();
+List<Photo> photoList = [];
+int pageCounter = 1;
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -13,26 +17,29 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   ScrollController _scrollController = new ScrollController();
-  List<Photo> photoList = [];
   Future<Photo> featuredPhoto;
 
   @override
   void initState() {
     super.initState();
-    GetPhotos().fetchPhotos().then((value) => setState(() {
-          photoList.addAll(value);
-        }));
+    GetPhotos()
+        .fetchPhotos(imageSearch.text, pageCounter)
+        .then((value) => setState(() {
+              photoList.addAll(value);
+            }));
     featuredPhoto = fetchRandomFeaturedPhoto();
   }
 
   bool onNotification(ScrollNotification notification) {
     if (notification is ScrollUpdateNotification) {
-      var triggerFetchMoreSize =
-          0.8 * _scrollController.position.maxScrollExtent;
-
-      if (_scrollController.position.pixels > triggerFetchMoreSize) {
+      if (_scrollController.position.pixels ==
+          _scrollController.position.maxScrollExtent) {
+        // var triggerFetchMoreSize =
+        //     0.8 * _scrollController.position.maxScrollExtent;
+        // if (_scrollController.position.pixels > triggerFetchMoreSize) {
         print('Loading more pics...');
-        GetPhotos().fetchPhotos().then((value) {
+        pageCounter = pageCounter + 1;
+        GetPhotos().fetchPhotos(imageSearch.text, pageCounter).then((value) {
           setState(() {
             photoList.addAll(value);
           });
@@ -102,7 +109,6 @@ class _HomeScreenState extends State<HomeScreen> {
 class MySliverAppBar extends SliverPersistentHeaderDelegate {
   final double expandedHeight;
   final Future<Photo> featuredPhoto;
-  final TextEditingController imageSearch = new TextEditingController();
 
   MySliverAppBar({@required this.expandedHeight, @required this.featuredPhoto});
 
@@ -233,32 +239,47 @@ class MySliverAppBar extends SliverPersistentHeaderDelegate {
   }
 
   Widget _searchImageTextField() {
-    return Container(
-      height: 40,
-      margin: EdgeInsets.only(left: 15, right: 15),
-      child: TextField(
-        style: TextStyle(color: Colors.white70),
-        cursorColor: Color.fromARGB(255, 107, 90, 100),
-        textAlignVertical: TextAlignVertical.center,
-        textAlign: TextAlign.left,
-        controller: imageSearch,
-        decoration: InputDecoration(
-          contentPadding: const EdgeInsets.symmetric(vertical: 0),
-          prefixIcon: Icon(Icons.search, color: Colors.white70),
-          border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(10),
-              borderSide: BorderSide(
-                width: 0,
-                style: BorderStyle.none,
-              )),
-          fillColor: Color.fromARGB(60, 118, 118, 128),
-          filled: true,
-          hintText: "Search photo...",
-          hintStyle: TextStyle(
-            color: Colors.white70,
+    return StatefulBuilder(
+      builder: (BuildContext context, StateSetter setState) {
+        return Container(
+          height: 40,
+          margin: EdgeInsets.only(left: 15, right: 15),
+          child: TextField(
+            textInputAction: TextInputAction.search,
+            onSubmitted: (value) {
+              photoList.clear();
+              GetPhotos()
+                  .fetchPhotos(imageSearch.text, pageCounter)
+                  .then((value) {
+                photoList.addAll(value);
+              });
+              pageCounter = 1;
+              print("search");
+            },
+            style: TextStyle(color: Colors.white70),
+            cursorColor: Color.fromARGB(255, 107, 90, 100),
+            textAlignVertical: TextAlignVertical.center,
+            textAlign: TextAlign.left,
+            controller: imageSearch,
+            decoration: InputDecoration(
+              contentPadding: const EdgeInsets.symmetric(vertical: 0),
+              prefixIcon: Icon(Icons.search, color: Colors.white70),
+              border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10),
+                  borderSide: BorderSide(
+                    width: 0,
+                    style: BorderStyle.none,
+                  )),
+              fillColor: Color.fromARGB(60, 118, 118, 128),
+              filled: true,
+              hintText: "Search photo...",
+              hintStyle: TextStyle(
+                color: Colors.white70,
+              ),
+            ),
           ),
-        ),
-      ),
+        );
+      },
     );
   }
 
