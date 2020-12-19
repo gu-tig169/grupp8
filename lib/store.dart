@@ -12,7 +12,7 @@ class PhotoStore extends ChangeNotifier {
   List<Photo> photoList = [];
   int pageCounter = 1;
 
-  PhotoStore._internal() {}
+  PhotoStore._internal();
 
   void incrementPageCounter() {
     pageCounter++;

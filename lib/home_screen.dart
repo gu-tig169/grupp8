@@ -32,6 +32,7 @@ class _HomeScreenState extends State<HomeScreen> {
     if (notification is ScrollUpdateNotification) {
       if (_scrollController.position.pixels ==
           _scrollController.position.maxScrollExtent) {
+        print('end reached');
         PhotoStore().incrementPageCounter();
         PhotoStore().callGetPhotos();
       }
@@ -271,42 +272,41 @@ class MySliverAppBar extends SliverPersistentHeaderDelegate {
 
   Widget _searchImageTextField() {
     return Center(
-      child: Padding(
-        padding: const EdgeInsets.only(left: 15, right: 15),
-        child: ClipRRect(
-          borderRadius: BorderRadius.circular(10),
-          child: SizedBox(
-            height: 40,
-            width: double.infinity,
-            child: BackdropFilter(
-              filter: ImageFilter.blur(
-                sigmaX: 10.0,
-                sigmaY: 10.0,
-              ),
-              child: CupertinoTextField(
-                 textInputAction: TextInputAction.search,
-            onSubmitted: (value) {
-              PhotoStore().resetPageCounter();
-              PhotoStore().clearPhotoList();
-              PhotoStore().callGetPhotos();
-                style: TextStyle(color: Colors.white),
-                cursorColor: Colors.white,
-                controller: imageSearch,
-                prefix: Padding(
-                  padding: const EdgeInsets.only(left: 10),
-                  child: Icon(Icons.search, color: Colors.white),
+        child: Padding(
+            padding: const EdgeInsets.only(left: 15, right: 15),
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(10),
+              child: SizedBox(
+                height: 40,
+                width: double.infinity,
+                child: BackdropFilter(
+                  filter: ImageFilter.blur(
+                    sigmaX: 10.0,
+                    sigmaY: 10.0,
+                  ),
+                  child: CupertinoTextField(
+                    textInputAction: TextInputAction.search,
+                    onSubmitted: (value) {
+                      PhotoStore().resetPageCounter();
+                      PhotoStore().clearPhotoList();
+                      PhotoStore().callGetPhotos();
+                    },
+                    style: TextStyle(color: Colors.white),
+                    cursorColor: Colors.white,
+                    controller: imageSearch,
+                    prefix: Padding(
+                      padding: const EdgeInsets.only(left: 10),
+                      child: Icon(Icons.search, color: Colors.white),
+                    ),
+                    placeholder: "Search photos",
+                    placeholderStyle: TextStyle(color: Colors.white),
+                    decoration: BoxDecoration(
+                      color: Color.fromARGB(100, 118, 118, 128),
+                    ),
+                  ),
                 ),
-                placeholder: "Search photos",
-                placeholderStyle: TextStyle(color: Colors.white),
-                decoration: BoxDecoration(
-                  color: Color.fromARGB(100, 118, 118, 128),
-                ),
               ),
-            ),
-          ),
-        );
-      },
-    );
+            )));
   }
 
   Widget _logoText() {

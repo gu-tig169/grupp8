@@ -40,14 +40,13 @@ Widget sliverLoaderIndicator() {
 
 Widget noResultIndicator() {
   return Container(
-    height: 200,
     child: Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
         Center(
           child: Container(
-            margin: EdgeInsets.all(5),
+            margin: EdgeInsets.only(top: 40),
             child: Text('No search results found'),
           ),
         ),
@@ -63,10 +62,8 @@ Widget noResultSliverLoaderIndicator() {
         return Column(
           children: <Widget>[
             Container(
-                width: double.infinity,
-                child: Card(
-                  child: noResultIndicator(),
-                ))
+              child: noResultIndicator(),
+            )
           ],
         );
       },
