@@ -1,5 +1,7 @@
+//import 'dart:html';
 import 'dart:ui';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 import 'package:flutter/services.dart';
@@ -52,7 +54,7 @@ class _HomePageState extends State<HomePage> {
         alignment: Alignment.topCenter,
         children: <Widget>[
           KeyboardAvoider(
-                      child: SlidingUpPanel(
+            child: SlidingUpPanel(
               maxHeight: 336,
               minHeight: 0,
               parallaxEnabled: false,
@@ -109,7 +111,7 @@ class _HomePageState extends State<HomePage> {
                       ],
                     ),
                     SizedBox(
-                      height: 35,
+                      height: 20,
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -278,27 +280,46 @@ class _HomePageState extends State<HomePage> {
               showDialog(
                 context: context,
                 builder: (BuildContext context) {
-                  return AlertDialog(
-                    backgroundColor: Color.fromARGB(255, 86, 75, 83),
-                    title: Text(
-                      "Oops! Looks like you forgot your username and/or password!",
-                      textAlign: TextAlign.left,
-                      style: TextStyle(color: Colors.white),
-                    ),
-                    actions: <Widget>[
-                      TextButton(
+                  return CupertinoAlertDialog(
+                    title: Text("Oops!"),
+                    content: Text(
+                        " Looks like you forgot your username and/or password!"),
+                    actions: [
+                      CupertinoDialogAction(
+                        isDefaultAction: true,
                         child: Text(
-                          'Try again',
+                          "Try again",
                           style: TextStyle(
-                            color: Colors.white,
+                            color: Colors.black,
                           ),
                         ),
                         onPressed: () {
-                          Navigator.of(context).pop();
+                          Navigator.pop(context);
                         },
-                      ),
+                      )
                     ],
                   );
+                  // return AlertDialog(
+                  //   backgroundColor: Color.fromARGB(255, 86, 75, 83),
+                  //   title: Text(
+                  //     "Oops! Looks like you forgot your username and/or password!",
+                  //     textAlign: TextAlign.left,
+                  //     style: TextStyle(color: Colors.white),
+                  //   ),
+                  //   actions: <Widget>[
+                  //     TextButton(
+                  //       child: Text(
+                  //         'Try again',
+                  //         style: TextStyle(
+                  //           color: Colors.white,
+                  //         ),
+                  //       ),
+                  //       onPressed: () {
+                  //         Navigator.of(context).pop();
+                  //       },
+                  //     ),
+                  //   ],
+                  // );
                 },
               );
           },
