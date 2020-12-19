@@ -1,10 +1,11 @@
 import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:grupp_8/image_service.dart';
 import 'about_us_screen.dart';
 import 'image_service.dart';
 import 'loader_indicators.dart';
+import 'photo.dart';
+import 'store.dart';
 import 'package:flutter/cupertino.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -14,31 +15,25 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   ScrollController _scrollController = new ScrollController();
-  List<Photo> photoList = [];
   Future<Photo> featuredPhoto;
   final TextEditingController imageSearch = new TextEditingController();
 
   @override
   void initState() {
     super.initState();
-    GetPhotos().fetchPhotos().then((value) => setState(() {
-          photoList.addAll(value);
-        }));
+    PhotoStore().addListener(() {
+      setState(() {});
+    });
+    PhotoStore().callGetPhotos();
     featuredPhoto = fetchRandomFeaturedPhoto();
   }
 
   bool onNotification(ScrollNotification notification) {
     if (notification is ScrollUpdateNotification) {
-      var triggerFetchMoreSize =
-          0.8 * _scrollController.position.maxScrollExtent;
-
-      if (_scrollController.position.pixels > triggerFetchMoreSize) {
-        print('Loading more pics...');
-        GetPhotos().fetchPhotos().then((value) {
-          setState(() {
-            photoList.addAll(value);
-          });
-        });
+      if (_scrollController.position.pixels ==
+          _scrollController.position.maxScrollExtent) {
+        PhotoStore().incrementPageCounter();
+        PhotoStore().callGetPhotos();
       }
     }
     return true;
@@ -76,7 +71,9 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Widget _imageListView() {
-    if (photoList.isNotEmpty) {
+    if (PhotoStore().photoList.isEmpty && !PhotoStore().isLoading) {
+      return noResultSliverLoaderIndicator();
+    } else if (PhotoStore().photoList.isNotEmpty && !PhotoStore().isLoading) {
       return _listViewBuilder();
     }
     return sliverLoaderIndicator();
@@ -94,11 +91,11 @@ class _HomeScreenState extends State<HomeScreen> {
                           bottom: BorderSide(
                               color: Colors.grey.shade100, width: 1.5))),
                   width: double.infinity,
-                  child: Image.network(photoList[index].photoUrl))
+                  child: Image.network(PhotoStore().photoList[index].photoUrl))
             ],
           );
         },
-        childCount: photoList.length,
+        childCount: PhotoStore().photoList.length,
       ),
     );
   }
@@ -107,7 +104,6 @@ class _HomeScreenState extends State<HomeScreen> {
 class MySliverAppBar extends SliverPersistentHeaderDelegate {
   final double expandedHeight;
   final Future<Photo> featuredPhoto;
-  final TextEditingController imageSearch = new TextEditingController();
 
   MySliverAppBar({@required this.expandedHeight, @required this.featuredPhoto});
 
@@ -288,6 +284,11 @@ class MySliverAppBar extends SliverPersistentHeaderDelegate {
                 sigmaY: 10.0,
               ),
               child: CupertinoTextField(
+                 textInputAction: TextInputAction.search,
+            onSubmitted: (value) {
+              PhotoStore().resetPageCounter();
+              PhotoStore().clearPhotoList();
+              PhotoStore().callGetPhotos();
                 style: TextStyle(color: Colors.white),
                 cursorColor: Colors.white,
                 controller: imageSearch,
@@ -303,8 +304,8 @@ class MySliverAppBar extends SliverPersistentHeaderDelegate {
               ),
             ),
           ),
-        ),
-      ),
+        );
+      },
     );
   }
 
