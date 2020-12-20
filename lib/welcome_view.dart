@@ -8,7 +8,7 @@ import 'package:flutter/services.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:keyboard_avoider/keyboard_avoider.dart';
 
-import 'home_screen.dart';
+import 'home_screen_view.dart';
 
 class WelcomeView extends StatelessWidget {
   @override

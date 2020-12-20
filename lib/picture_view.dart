@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'home_screen.dart';
+import 'home_screen_view.dart';
 import 'package:like_button/like_button.dart';
 
 class PictureView extends StatefulWidget {
