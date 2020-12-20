@@ -7,7 +7,7 @@
 
 Plenty of pics is a flutter app that allows the user to view photos and search photos via the unsplash API.
 
-This is a third year school project by six students studying the Gothenburg University in Sweden.
+This is a third year school project by six students studying at Gothenburg University in Sweden.
 
 ## Contributors
 
