@@ -20,8 +20,6 @@ Thanks to the following people who have contributed to this project:
 * [@EmilioSvensson](https://github.com/EmilioSvensson)
 * [@imschafhauser](https://github.com/imschafhauser)
 
-## Contact
-
 
 ## License
 <!--- If you're not sure which open license to use see https://choosealicense.com/--->
