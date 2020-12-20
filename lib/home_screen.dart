@@ -7,6 +7,8 @@ import 'loader_indicators.dart';
 import 'photo.dart';
 import 'store.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/services.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -87,16 +89,85 @@ class _HomeScreenState extends State<HomeScreen> {
           return Column(
             children: <Widget>[
               Container(
-                  decoration: BoxDecoration(
-                      border: Border(
-                          bottom: BorderSide(
-                              color: Colors.grey.shade100, width: 1.5))),
-                  width: double.infinity,
-                  child: Image.network(PhotoStore().photoList[index].photoUrl))
+                decoration: BoxDecoration(
+                    border: Border(
+                        bottom: BorderSide(
+                            color: Colors.grey.shade100, width: 1.5))),
+                width: double.infinity,
+                child: GestureDetector(
+                  child: Hero(
+                    tag: 'heroTag$index',
+                    child:
+                        Image.network(PhotoStore().photoList[index].photoUrl),
+                  ),
+                  onTap: () {
+                    print('heroTag$index');
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) {
+                          return FullScreen('heroTag$index');
+                        },
+                      ),
+                    );
+                  },
+                ),
+              )
             ],
           );
         },
         childCount: PhotoStore().photoList.length,
+      ),
+    );
+  }
+}
+
+// Vill alltså skicka med "heroTag$index" och sätta in det i heroTag som finns nedan
+// i FullScreen samt visa bild från listan istället för den statiska. Använder även en
+// chachefunktion som gör så att den inte behöver ladda in hela bilden en gång till.
+
+class FullScreen extends StatefulWidget {
+  final String heroTag;
+
+  FullScreen(this.heroTag);
+
+  @override
+  _FullScreenState createState() => _FullScreenState();
+}
+
+class _FullScreenState extends State<FullScreen> {
+  @override
+  initState() {
+    SystemChrome.setEnabledSystemUIOverlays([]);
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    //SystemChrome.restoreSystemUIOverlays();
+    SystemChrome.setEnabledSystemUIOverlays(SystemUiOverlay.values);
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: GestureDetector(
+        child: Center(
+          child: Hero(
+            tag: widget.heroTag,
+            child: CachedNetworkImage(
+              imageUrl:
+                  'https://images.unsplash.com/photo-1608411404720-c8f0417bcdba?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=934&q=80',
+              placeholder: null,
+              errorWidget: null,
+            ),
+          ),
+        ),
+        onTap: () {
+          print(widget.heroTag);
+          Navigator.pop(context);
+        },
       ),
     );
   }
