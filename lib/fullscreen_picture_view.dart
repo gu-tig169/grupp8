@@ -83,9 +83,9 @@ class _FullScreenState extends State<FullScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SafeArea(
-        child: Material(
+    return SafeArea(
+      child: Scaffold(
+        body: Material(
             child: Stack(
           fit: StackFit.expand,
           children: [
@@ -213,9 +213,9 @@ class _FullScreenState extends State<FullScreen> {
     return GestureDetector(
       onTap: () {
         Navigator.pop(
-                context,
-                MaterialPageRoute(builder: (context) => (HomeScreen())),
-              );
+          context,
+          MaterialPageRoute(builder: (context) => (HomeScreen())),
+        );
       },
       child: Icon(
         CupertinoIcons.xmark,

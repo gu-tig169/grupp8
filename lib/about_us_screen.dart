@@ -10,82 +10,79 @@ class AboutUs extends StatefulWidget {
 class _AboutUsState extends State<AboutUs> {
   @override
   Widget build(BuildContext context) {
-    return Material(
-      child: SafeArea(
-        top: true,
-        child: Scaffold(
-          backgroundColor: Color.fromARGB(255, 49, 41, 47),
-          appBar: AppBar(
-            elevation: 0.0,
-            backgroundColor: Colors.transparent,
-            leading: IconButton(
-              icon: Icon(Icons.arrow_back),
-              onPressed: () {
-                Navigator.pop(
-                  context,
-                  MaterialPageRoute(builder: (context) => (HomeScreen())),
-                );
-              },
-            ),
+    return SafeArea(
+      child: Scaffold(
+        backgroundColor: Colors.grey[850],
+        appBar: AppBar(
+          elevation: 0.0,
+          backgroundColor: Colors.transparent,
+          leading: IconButton(
+            icon: Icon(Icons.arrow_back),
+            onPressed: () {
+              Navigator.pop(
+                context,
+                MaterialPageRoute(builder: (context) => (HomeScreen())),
+              );
+            },
           ),
-          body: Stack(
-            alignment: Alignment.center,
-            children: [
-              Column(
+        ),
+        body: Stack(
+          alignment: Alignment.center,
+          children: [
+            Column(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                Container(),
+              ],
+            ),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Padding(
+                  padding: EdgeInsets.only(bottom: 15.0),
+                  child: Text(
+                    "ABOUT US",
+                    style: TextStyle(
+                      fontSize: 35,
+                      letterSpacing: 1.5,
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+                Container(
+                  padding: EdgeInsets.all(10.0),
+                  width: MediaQuery.of(context).size.width / 2.5,
+                  height: MediaQuery.of(context).size.width / 2.5,
+                  decoration: BoxDecoration(
+                    border: Border.all(color: Colors.white, width: 5),
+                    shape: BoxShape.circle,
+                    color: Colors.white,
+                    image: DecorationImage(
+                      fit: BoxFit.cover,
+                      image: AssetImage('assets/images/grupp8.png'),
+                    ),
+                  ),
+                ),
+                _aboutParagraph(),
+              ],
+            ),
+            Center(
+              child: Column(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
-                  Container(),
-                ],
-              ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
                   Padding(
-                    padding: EdgeInsets.only(bottom: 15.0),
-                    child: Text(
-                      "ABOUT US",
-                      style: TextStyle(
-                        fontSize: 35,
-                        letterSpacing: 1.5,
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
+                    padding: const EdgeInsets.only(bottom: 10),
+                    child: logoutButton(context),
                   ),
-                  Container(
-                    padding: EdgeInsets.all(10.0),
-                    width: MediaQuery.of(context).size.width / 2.5,
-                    height: MediaQuery.of(context).size.width / 2.5,
-                    decoration: BoxDecoration(
-                      border: Border.all(color: Colors.white, width: 5),
-                      shape: BoxShape.circle,
-                      color: Colors.white,
-                      image: DecorationImage(
-                        fit: BoxFit.cover,
-                        image: AssetImage('assets/images/grupp8.png'),
-                      ),
-                    ),
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 20),
+                    child: appVerText(),
                   ),
-                  _aboutParagraph(),
                 ],
               ),
-              Center(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.only(bottom: 10),
-                      child: logoutButton(context),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(bottom: 20),
-                      child: appVerText(),
-                    ),
-                  ],
-                ),
-              ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );
@@ -119,19 +116,19 @@ Widget logoutButton(context) {
       height: 45,
       child: RaisedButton(
         elevation: 7.0,
-        textColor: Color.fromARGB(255, 224, 234, 255),
+        textColor: Colors.black,
         child: Text(
           "Log out",
-          style: TextStyle(fontSize: 15, fontWeight: FontWeight.w600),
+          style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
         ),
-        color: Color.fromARGB(255, 107, 90, 100),
+        color: Color.fromARGB(255, 196, 196, 196),
         shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(40.0),
+            borderRadius: BorderRadius.circular(10),
             side: BorderSide(color: Color.fromARGB(255, 86, 75, 83))),
         onPressed: () {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => (WelcomeView())),
+            MaterialPageRoute(builder: (context) => (HomePage())),
           );
         },
       ),
