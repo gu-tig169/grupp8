@@ -86,9 +86,9 @@ class _FullScreenState extends State<FullScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SafeArea(
-        child: Material(
+    return SafeArea(
+      child: Scaffold(
+        body: Material(
             child: Stack(
           fit: StackFit.expand,
           children: [

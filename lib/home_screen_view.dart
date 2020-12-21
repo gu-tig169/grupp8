@@ -48,10 +48,9 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SafeArea(
-        top: true,
-        child: Material(
+    return SafeArea(
+      child: Scaffold(
+        body: Material(
           child: NotificationListener(
             onNotification: onNotification,
             child: CustomScrollView(
