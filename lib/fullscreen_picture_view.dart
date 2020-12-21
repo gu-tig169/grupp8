@@ -6,6 +6,9 @@ import 'photo.dart';
 import 'package:photo_view/photo_view.dart';
 import 'package:like_button/like_button.dart';
 import 'home_screen_view.dart';
+import 'package:auto_size_text/auto_size_text.dart';
+
+
 
 // class FullScreen extends StatefulWidget {
 //   final Photo heroTag;
@@ -237,12 +240,17 @@ class _FullScreenState extends State<FullScreen> {
   }
 
   Widget _photographerName() {
-    return Text(
-      ('Photo by ' + widget.photo.user),
-      style: TextStyle(
-        color: Colors.white,
-        fontSize: 18,
-      ),
+    return Padding(padding: 
+    EdgeInsets.only(
+      left: 50,
+      right: 50,
+    ),
+    child: AutoSizeText('Photo by ' + widget.photo.user,
+    maxLines: 1,
+    minFontSize: 13,
+    style: TextStyle(fontSize: 16),
+    overflow: TextOverflow.ellipsis,
+    ),
     );
   }
 

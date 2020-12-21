@@ -37,6 +37,7 @@ dependencies:
   keyboard_avoider: ^0.1.2
   cached_network_image: ^2.4.1
   photo_view: ^0.10.3
+  auto_size_text: ^2.1.0
 
 dev_dependencies:
   flutter_test:
