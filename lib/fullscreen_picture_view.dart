@@ -116,6 +116,13 @@ class _FullScreenState extends State<FullScreen> {
                 child: _photographerName(),
               ),
             ),
+            Positioned.fill(
+              top: 40,
+              child: Align(
+                alignment: Alignment.topCenter,
+                child: _photoLocation(),
+              ),
+            ),
           ],
         )),
       ),
@@ -224,16 +231,28 @@ class _FullScreenState extends State<FullScreen> {
   }
 
   Widget _photographerName() {
-    return GestureDetector(
-      onTap: () {},
-      child: Text(
-        ('Photo by ' + widget.photo.user),
-        style: TextStyle(
-          color: Colors.white,
-          fontSize: 18,
-        ),
+    return Text(
+      ('Photo by ' + widget.photo.user),
+      style: TextStyle(
+        color: Colors.white,
+        fontSize: 18,
       ),
     );
+  }
+
+  Widget _photoLocation() {
+    if (widget.photo.location != null) {
+      return Text((widget.photo.location),
+          style: TextStyle(
+            color: Colors.white,
+            fontSize: 15,
+          ));
+    } else
+      return Text(('Unknown location'),
+          style: TextStyle(
+            color: Colors.white,
+            fontSize: 15,
+          ));
   }
 
   Future<bool> onLikeButtonTapped(bool isLiked) async {
