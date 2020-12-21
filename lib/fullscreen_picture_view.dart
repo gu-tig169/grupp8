@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'photo.dart';
 import 'package:photo_view/photo_view.dart';
 import 'package:like_button/like_button.dart';
+import 'home_screen_view.dart';
 
 // class FullScreen extends StatefulWidget {
 //   final Photo heroTag;
@@ -210,7 +211,12 @@ class _FullScreenState extends State<FullScreen> {
 
   Widget _backButton() {
     return GestureDetector(
-      onTap: () {},
+      onTap: () {
+        Navigator.pop(
+                context,
+                MaterialPageRoute(builder: (context) => (HomeScreen())),
+              );
+      },
       child: Icon(
         CupertinoIcons.xmark,
         color: Colors.white,
