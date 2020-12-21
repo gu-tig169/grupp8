@@ -142,9 +142,10 @@ class _HomePageState extends State<HomePage> {
       width: MediaQuery.of(context).size.width * 1,
       height: MediaQuery.of(context).size.height * 1,
       decoration: BoxDecoration(
-          image: DecorationImage(
-              image: AssetImage("assets/images/startview.jpg"),
-              fit: BoxFit.cover)),
+        image: DecorationImage(
+            image: AssetImage("assets/images/startview.jpg"),
+            fit: BoxFit.cover),
+      ),
       child: Stack(
         fit: StackFit.loose,
         children: [
