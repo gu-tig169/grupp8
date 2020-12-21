@@ -1,9 +1,7 @@
 import 'dart:ui';
-
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'photo.dart';
 import 'package:photo_view/photo_view.dart';
 import 'package:like_button/like_button.dart';
@@ -61,8 +59,8 @@ import 'package:like_button/like_button.dart';
 // }
 
 class FullScreen extends StatefulWidget {
-  final Photo heroTag;
-  FullScreen(this.heroTag);
+  final Photo photo;
+  FullScreen(this.photo);
 
   @override
   _FullScreenState createState() => _FullScreenState();
@@ -131,10 +129,10 @@ class _FullScreenState extends State<FullScreen> {
       initialScale: PhotoViewComputedScale.contained,
       minScale: PhotoViewComputedScale.contained,
       maxScale: PhotoViewComputedScale.covered,
-      heroAttributes: PhotoViewHeroAttributes(tag: widget.heroTag.id),
+      heroAttributes: PhotoViewHeroAttributes(tag: widget.photo.id),
       child: GestureDetector(
         child: CachedNetworkImage(
-          imageUrl: widget.heroTag.photoUrl,
+          imageUrl: widget.photo.photoUrl,
           placeholder: null,
           errorWidget: null,
         ),
@@ -185,7 +183,9 @@ class _FullScreenState extends State<FullScreen> {
           sigmaY: 10.0,
         ),
         child: GestureDetector(
-          onTap: () {},
+          onTap: () {
+            print('test');
+          },
           child: Container(
             color: Color.fromARGB(125, 255, 255, 255),
             width: 70,
@@ -227,7 +227,7 @@ class _FullScreenState extends State<FullScreen> {
     return GestureDetector(
       onTap: () {},
       child: Text(
-        ('Sven Svensson'),
+        ('Photo by ' + widget.photo.user),
         style: TextStyle(
           color: Colors.white,
           fontSize: 18,
