@@ -241,18 +241,26 @@ class _FullScreenState extends State<FullScreen> {
   }
 
   Widget _photoLocation() {
-    if (widget.photo.location != null) {
-      return Text((widget.photo.location),
+    if (widget.photo.city != null && widget.photo.country != null) {
+      return Text((widget.photo.city + ', ' + widget.photo.country),
           style: TextStyle(
             color: Colors.white,
             fontSize: 15,
           ));
-    } else
-      return Text(('Unknown location'),
+    } else if (widget.photo.country != null) {
+      return Text((widget.photo.country),
           style: TextStyle(
             color: Colors.white,
             fontSize: 15,
           ));
+    } else if (widget.photo.city != null) {
+      return Text((widget.photo.country),
+          style: TextStyle(
+            color: Colors.white,
+            fontSize: 15,
+          ));
+    }
+    return Text('');
   }
 
   Future<bool> onLikeButtonTapped(bool isLiked) async {

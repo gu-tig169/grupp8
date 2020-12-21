@@ -3,7 +3,7 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'photo.dart';
 
-String apiKey = 'Y_eztk9R60rYLH2HaYE3SD4B3jShJWKpxZY0D00tA1E';
+String apiKey = 'QM7rfeVBnVQKCSdSD2iL5yC8qt80lWstn6glQXqoFR0';
 
 Future<Photo> fetchRandomFeaturedPhoto() async {
   final response = await http.get(
@@ -14,7 +14,7 @@ Future<Photo> fetchRandomFeaturedPhoto() async {
   );
 
   if (response.statusCode == 200) {
-    final res = jsonDecode(response.body);
+    final res = jsonDecode(utf8.decode(response.bodyBytes));
     return Photo.fromJson(res);
   } else {
     throw Exception('Failed to load image');
@@ -34,7 +34,7 @@ class GetPhotos {
     );
 
     if (response.statusCode == 200) {
-      final res = jsonDecode(response.body);
+      final res = jsonDecode(utf8.decode(response.bodyBytes));
       List data = imageSearch.isNotEmpty ? res['results'] : res;
       return data.map((photo) => new Photo.fromJson(photo)).toList();
     } else {
