@@ -6,6 +6,9 @@ import 'photo.dart';
 import 'package:photo_view/photo_view.dart';
 import 'package:like_button/like_button.dart';
 import 'home_screen_view.dart';
+import 'package:auto_size_text/auto_size_text.dart';
+
+
 
 // class FullScreen extends StatefulWidget {
 //   final Photo heroTag;
@@ -92,12 +95,12 @@ class _FullScreenState extends State<FullScreen> {
             _photoView(),
             Positioned(
               child: _heartButton(),
-              bottom: 110,
+              bottom: 85,
               right: 20,
             ),
             Positioned(
               child: _saveButton(),
-              bottom: 30,
+              bottom: 15,
               right: 20,
             ),
             Positioned(
@@ -111,7 +114,7 @@ class _FullScreenState extends State<FullScreen> {
               right: 10,
             ),
             Positioned.fill(
-              top: 17,
+              top: 13,
               child: Align(
                 alignment: Alignment.topCenter,
                 child: _photographerName(),
@@ -163,8 +166,8 @@ class _FullScreenState extends State<FullScreen> {
           onTap: () {},
           child: Container(
             color: Color.fromARGB(150, 59, 55, 55),
-            width: 70,
-            height: 70,
+            width: 60,
+            height: 60,
             child: LikeButton(
               padding: EdgeInsets.only(left: 4),
               onTap: onLikeButtonTapped,
@@ -172,7 +175,7 @@ class _FullScreenState extends State<FullScreen> {
                 return Icon(
                   Icons.favorite_sharp,
                   color: isLiked ? Colors.redAccent : Colors.white,
-                  size: 30,
+                  size: 24,
                 );
               },
             ),
@@ -196,12 +199,12 @@ class _FullScreenState extends State<FullScreen> {
           },
           child: Container(
             color: Color.fromARGB(125, 255, 255, 255),
-            width: 70,
-            height: 70,
+            width: 60,
+            height: 60,
             child: Icon(
               CupertinoIcons.arrow_down,
               color: Colors.black,
-              size: 30,
+              size: 24,
             ),
           ),
         ),
@@ -213,14 +216,14 @@ class _FullScreenState extends State<FullScreen> {
     return GestureDetector(
       onTap: () {
         Navigator.pop(
-                context,
-                MaterialPageRoute(builder: (context) => (HomeScreen())),
-              );
+          context,
+          MaterialPageRoute(builder: (context) => (HomeScreen())),
+        );
       },
       child: Icon(
         CupertinoIcons.xmark,
         color: Colors.white,
-        size: 30,
+        size: 26,
       ),
     );
   }
@@ -231,18 +234,23 @@ class _FullScreenState extends State<FullScreen> {
       child: Icon(
         CupertinoIcons.square_arrow_up,
         color: Colors.white,
-        size: 30,
+        size: 26,
       ),
     );
   }
 
   Widget _photographerName() {
-    return Text(
-      ('Photo by ' + widget.photo.user),
-      style: TextStyle(
-        color: Colors.white,
-        fontSize: 18,
-      ),
+    return Padding(padding: 
+    EdgeInsets.only(
+      left: 50,
+      right: 50,
+    ),
+    child: AutoSizeText('Photo by ' + widget.photo.user,
+    maxLines: 1,
+    minFontSize: 13,
+    style: TextStyle(fontSize: 16),
+    overflow: TextOverflow.ellipsis,
+    ),
     );
   }
 
