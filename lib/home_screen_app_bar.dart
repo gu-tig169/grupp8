@@ -202,10 +202,15 @@ class HomeScreenAppBar extends SliverPersistentHeaderDelegate {
                     controller: imageSearch,
                     prefix: Padding(
                       padding: const EdgeInsets.only(left: 10),
-                      child: Icon(Icons.search, color: Colors.white),
+                      child: Icon(
+                        CupertinoIcons.search,
+                        color: Colors.white,
+                      ),
                     ),
                     placeholder: "Search photos",
-                    placeholderStyle: TextStyle(color: Colors.white),
+                    placeholderStyle: TextStyle(
+                      color: Colors.white,
+                    ),
                     decoration: BoxDecoration(
                       color: Color.fromARGB(100, 118, 118, 128),
                     ),
