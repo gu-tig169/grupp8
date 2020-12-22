@@ -21,6 +21,8 @@ class _HomeScreenState extends State<HomeScreen> {
   Future<Photo> featuredPhoto;
   final TextEditingController imageSearch = new TextEditingController();
 
+// Fills featured image and photo list with images from Unsplash API on startup.
+
   @override
   void initState() {
     super.initState();
@@ -30,6 +32,7 @@ class _HomeScreenState extends State<HomeScreen> {
     PhotoStore().callGetPhotos();
     featuredPhoto = fetchRandomFeaturedPhoto();
   }
+//Gets new photo requests when reaching end of scroll view to return more images (endless scroll/paging).
 
   bool onNotification(ScrollNotification notification) {
     if (notification is ScrollUpdateNotification) {
@@ -47,6 +50,8 @@ class _HomeScreenState extends State<HomeScreen> {
     _scrollController.dispose();
     super.dispose();
   }
+
+// Design for the home screen view. 
 
   @override
   Widget build(BuildContext context) {
@@ -72,6 +77,8 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
+// Handles and displays loading state. Calls sliver list builder to build the list of images from a request.
+
   Widget _imageListView() {
     if (PhotoStore().photoList.isEmpty && !PhotoStore().isLoading) {
       return noResultSliverLoaderIndicator();
@@ -80,6 +87,8 @@ class _HomeScreenState extends State<HomeScreen> {
     }
     return sliverLoaderIndicator();
   }
+
+// Builds a sliver list with network images fetched from the Unsplash API using photo store.
 
   Widget _listViewBuilder() {
     return SliverList(

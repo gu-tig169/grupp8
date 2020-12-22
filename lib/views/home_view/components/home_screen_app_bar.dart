@@ -10,6 +10,9 @@ import 'store.dart';
 
 import '../../about_view/about_us_screen_view.dart';
 
+// Custom made app bar for text input search field & featured image to facilitate scroll fade using slivers.
+// Inherits from sliver delegate to build below design according to Sliver constraints.
+
 class HomeScreenAppBar extends SliverPersistentHeaderDelegate {
   final double expandedHeight;
   final Future<Photo> featuredPhoto;
@@ -118,6 +121,8 @@ class HomeScreenAppBar extends SliverPersistentHeaderDelegate {
   @override
   bool shouldRebuild(SliverPersistentHeaderDelegate oldDelegate) => true;
 
+// Fetches a random featured photo.
+
   Widget _futureFeaturedPhotoBuilder(Future<Photo> featuredPhoto) {
     return FutureBuilder<Photo>(
         future: featuredPhoto,
@@ -130,6 +135,8 @@ class HomeScreenAppBar extends SliverPersistentHeaderDelegate {
           return loadingIndicator();
         });
   }
+
+// Design for the featured header/top image.
 
   Widget _topImage(Photo photo) {
     return Container(
@@ -178,6 +185,8 @@ class HomeScreenAppBar extends SliverPersistentHeaderDelegate {
     );
   }
 
+// Design for search field.
+
   Widget _searchImageTextField() {
     return Center(
         child: Padding(
@@ -221,6 +230,8 @@ class HomeScreenAppBar extends SliverPersistentHeaderDelegate {
               ),
             )));
   }
+
+// Logo widget.
 
   Widget _logoText() {
     return Text(
