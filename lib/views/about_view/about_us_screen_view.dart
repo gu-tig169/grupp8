@@ -4,6 +4,8 @@ import 'package:grupp_8/models/constants.dart';
 import '../welcome_view/welcome_view.dart';
 import '../home_view/home_screen_view.dart';
 
+// (Currently) UI for the About Us page.
+
 class AboutUs extends StatefulWidget {
   @override
   _AboutUsState createState() => _AboutUsState();

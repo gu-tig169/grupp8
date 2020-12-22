@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+// Handles loading state in the home screen / sliver list views while waiting for images to be returned.
+
 Widget loadingIndicator() {
   return Container(
     height: 200,

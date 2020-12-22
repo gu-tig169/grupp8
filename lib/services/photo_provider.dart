@@ -7,6 +7,8 @@ import '../models/photo.dart';
 
 String apiKey = 'QM7rfeVBnVQKCSdSD2iL5yC8qt80lWstn6glQXqoFR0';
 
+// This class provides photos from the Unsplash API based on the photo object
+// Get request for a random Featured Photo from Unsplash API 
 
 Future<Photo> fetchRandomFeaturedPhoto() async {
   final response = await http.get(
@@ -23,6 +25,8 @@ Future<Photo> fetchRandomFeaturedPhoto() async {
     throw Exception('Failed to load image');
   }
 }
+
+// Get request for photos through image search. If no search query, fetch (5) random photos.
 
 class GetPhotos {
   Future<List<Photo>> fetchPhotos(String imageSearch, int pageCounter) async {
