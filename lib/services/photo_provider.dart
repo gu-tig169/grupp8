@@ -1,9 +1,11 @@
-import 'dart:io';
-import 'package:http/http.dart' as http;
 import 'dart:convert';
-import 'photo.dart';
+import 'dart:io';
 
-String apiKey = 'jAqnxNTNnSEKikg3SA6VMuWrVgxCjKKI8PS7S7D8FeY';
+import 'package:http/http.dart' as http;
+
+import '../models/photo.dart';
+
+String apiKey = 'QM7rfeVBnVQKCSdSD2iL5yC8qt80lWstn6glQXqoFR0';
 
 
 Future<Photo> fetchRandomFeaturedPhoto() async {

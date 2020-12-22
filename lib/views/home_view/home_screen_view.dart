@@ -1,13 +1,15 @@
 import 'dart:ui';
+
 import 'package:flutter/material.dart';
-import 'package:grupp_8/image_service.dart';
-import 'home_screen_app_bar.dart';
-import 'image_service.dart';
-import 'loader_indicators.dart';
-import 'photo.dart';
-import 'store.dart';
+import 'package:grupp_8/models/photo.dart';
+import 'package:grupp_8/services/photo_provider.dart';
 import 'package:flutter/cupertino.dart';
-import 'fullscreen_picture_view.dart';
+
+import 'components/home_screen_app_bar.dart';
+import 'components/store.dart';
+import 'components/loader_indicators.dart';
+
+import '../fullscreen_view/fullscreen_picture_view.dart';
 
 class HomeScreen extends StatefulWidget {
   @override

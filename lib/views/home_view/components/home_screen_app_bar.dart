@@ -1,11 +1,14 @@
 import 'dart:ui';
+
 import 'package:flutter/material.dart';
-import 'about_us_screen.dart';
-import 'loader_indicators.dart';
-import 'photo.dart';
-import 'store.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
+import 'package:grupp_8/models/photo.dart';
+
+import 'loader_indicators.dart';
+import 'store.dart';
+
+import '../../about_view/about_us_screen_view.dart';
 
 class HomeScreenAppBar extends SliverPersistentHeaderDelegate {
   final double expandedHeight;
@@ -25,7 +28,6 @@ class HomeScreenAppBar extends SliverPersistentHeaderDelegate {
           child: Container(
             width: double.infinity,
             color: Colors.transparent,
-            //color: Color.fromARGB(255, 49, 41, 47),
           ),
         ),
         Positioned.fill(

@@ -1,4 +1,3 @@
-//import 'dart:html';
 import 'dart:ui';
 
 import 'package:flutter/cupertino.dart';
@@ -7,28 +6,7 @@ import 'package:sliding_up_panel/sliding_up_panel.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:keyboard_avoider/keyboard_avoider.dart';
 
-import 'home_screen_view.dart';
-
-// class WelcomeView extends StatelessWidget {
-//   @override
-//   Widget build(BuildContext context) {
-//     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-//       systemNavigationBarColor: Colors.grey[200],
-//       systemNavigationBarIconBrightness: Brightness.dark,
-//       systemNavigationBarDividerColor: Colors.black,
-//     ));
-
-//     return MaterialApp(
-//       debugShowCheckedModeBanner: false,
-//       title: '',
-//       theme: ThemeData(
-//         brightness: Brightness.dark,
-//         visualDensity: VisualDensity.adaptivePlatformDensity,
-//       ),
-//       home: HomePage(),
-//     );
-//   }
-// }
+import '../home_view/home_screen_view.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -126,7 +104,6 @@ class _HomePageState extends State<HomePage> {
                   borderRadius: BorderRadius.only(
                       topLeft: Radius.circular(18.0),
                       topRight: Radius.circular(18.0)),
-                  //color: Color.fromARGB(255, 172, 171, 173),
                   color: Colors.grey[850],
                 ),
               ),
@@ -170,13 +147,6 @@ class _HomePageState extends State<HomePage> {
               child: registerButtonBody(),
             ),
           ),
-          // Positioned.fill(
-          //   bottom: 100,
-          //   child: Align(
-          //     alignment: Alignment.bottomCenter,
-          //     child: unsplashLogo(),
-          //   ),
-          // ),
         ],
       ),
     );
@@ -381,7 +351,6 @@ OF PICS''',
                 style: TextStyle(fontSize: 15, fontWeight: FontWeight.w600),
               ),
               color: Color.fromARGB(150, 59, 55, 55),
-              //color: Color.fromARGB(255, 86, 75, 83),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(10),
                 side: BorderSide.none,
