@@ -16,12 +16,34 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   PanelController _pc = new PanelController();
 
+  FocusNode focusNodeUsername = FocusNode();
+  String hintTextUsername = 'Username';
+
+  FocusNode focusNodePassword = FocusNode();
+  String hintTextPassword = 'Password';
+
   final TextEditingController passwordInput = new TextEditingController();
   final TextEditingController usernameInput = new TextEditingController();
 
   @override
   void initState() {
     super.initState();
+    focusNodeUsername.addListener(() {
+      if (focusNodeUsername.hasFocus) {
+        hintTextUsername = '';
+      } else {
+        hintTextUsername = 'Username';
+      }
+      setState(() {});
+    });
+        focusNodePassword.addListener(() {
+      if (focusNodePassword.hasFocus) {
+        hintTextPassword = '';
+      } else {
+        hintTextPassword = 'Password';
+      }
+      setState(() {});
+    });
   }
 
   @override
@@ -159,6 +181,7 @@ class _HomePageState extends State<HomePage> {
         right: 60,
       ),
       child: TextField(
+        focusNode: focusNodeUsername,
         style: TextStyle(color: Colors.white),
         cursorColor: Colors.white,
         textAlignVertical: TextAlignVertical.center,
@@ -176,20 +199,22 @@ class _HomePageState extends State<HomePage> {
           ),
           fillColor: Colors.blueGrey[700],
           filled: true,
-          hintText: "Username",
+          hintText: hintTextUsername,
           hintStyle: TextStyle(
             fontWeight: FontWeight.bold,
             color: Colors.white70.withOpacity(0.42069),
           ),
         ),
       ),
-      decoration: BoxDecoration(boxShadow: [
-        BoxShadow(
-          color: Colors.black45,
-          blurRadius: 7,
-          offset: const Offset(0, 5),
-        )
-      ]),
+      decoration: BoxDecoration(
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black45,
+            blurRadius: 7,
+            offset: const Offset(0, 5),
+          )
+        ],
+      ),
     );
   }
 
@@ -200,6 +225,7 @@ class _HomePageState extends State<HomePage> {
         right: 60,
       ),
       child: TextField(
+        focusNode: focusNodePassword,
         style: TextStyle(color: Colors.white),
         cursorColor: Colors.white,
         textAlignVertical: TextAlignVertical.center,
@@ -216,7 +242,7 @@ class _HomePageState extends State<HomePage> {
               )),
           fillColor: Colors.blueGrey[700],
           filled: true,
-          hintText: "Password",
+          hintText: hintTextPassword,
           hintStyle: TextStyle(
             fontWeight: FontWeight.bold,
             color: Colors.white70.withOpacity(0.42069),
