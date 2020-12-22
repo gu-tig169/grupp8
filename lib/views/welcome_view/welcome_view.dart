@@ -168,17 +168,18 @@ class _HomePageState extends State<HomePage> {
         decoration: InputDecoration(
           contentPadding: const EdgeInsets.symmetric(vertical: 15.0),
           border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(10),
-              borderSide: BorderSide(
-                width: 0,
-                style: BorderStyle.none,
-              )),
+            borderRadius: BorderRadius.circular(10),
+            borderSide: BorderSide(
+              width: 0,
+              style: BorderStyle.none,
+            ),
+          ),
           fillColor: Colors.blueGrey[700],
           filled: true,
           hintText: "Username",
           hintStyle: TextStyle(
             fontWeight: FontWeight.bold,
-            color: Colors.white70,
+            color: Colors.white70.withOpacity(0.42069),
           ),
         ),
       ),
@@ -218,7 +219,7 @@ class _HomePageState extends State<HomePage> {
           hintText: "Password",
           hintStyle: TextStyle(
             fontWeight: FontWeight.bold,
-            color: Colors.white70,
+            color: Colors.white70.withOpacity(0.42069),
           ),
         ),
       ),
