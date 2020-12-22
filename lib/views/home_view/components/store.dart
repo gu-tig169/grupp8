@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'photo.dart';
-import 'image_service.dart';
+import 'package:grupp_8/models/photo.dart';
+import 'package:grupp_8/services/photo_provider.dart';
 
 final TextEditingController imageSearch = new TextEditingController();
 

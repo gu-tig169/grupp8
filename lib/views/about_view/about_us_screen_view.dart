@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:grupp_8/constants.dart';
-import 'welcome_view.dart';
-import 'home_screen_view.dart';
+import 'package:grupp_8/models/constants.dart';
+
+import '../welcome_view/welcome_view.dart';
+import '../home_view/home_screen_view.dart';
 
 class AboutUs extends StatefulWidget {
   @override
@@ -57,48 +58,7 @@ class _AboutUsState extends State<AboutUs> {
                   ),
                 ],
               ),
-              // Column(
-              //   mainAxisAlignment: MainAxisAlignment.center,
-              //   crossAxisAlignment: CrossAxisAlignment.center,
-              //   children: <Widget>[
-              //     Padding(
-              //       padding:
-              //           const EdgeInsets.symmetric(horizontal: kDefaultPadding),
-              //       child: Container(
-              //         height: size.width / 2,
-              //         decoration: BoxDecoration(
-              //           color: Colors.black.withOpacity(0.75),
-              //         ),
-              //         child: _aboutParagraph(),
-              //       ),
-              //     )
-              //   ],
-              // ),
-              // Column(
-              //   crossAxisAlignment: CrossAxisAlignment.center,
-              //   children: [
-              //     // Padding(
-              //     //   padding: const EdgeInsets.symmetric(
-              //     //       vertical: kDefaultPadding * 4),
-              //     //   child: Container(
-              //     //     padding: EdgeInsets.all(10.0),
-              //     //     width: MediaQuery.of(context).size.width / 2.5,
-              //     //     height: MediaQuery.of(context).size.width / 2.5,
-              //     //     decoration: BoxDecoration(
-              //     //       border: Border.all(color: Colors.white, width: 5),
-              //     //       shape: BoxShape.circle,
-              //     //       color: Colors.white,
-              //     //       image: DecorationImage(
-              //     //         fit: BoxFit.cover,
-              //     //         image: AssetImage('assets/images/grupp8.png'),
-              //     //       ),
-              //     //     ),
-              //     //   ),
-              //     // ),
-
-              //     _aboutParagraph(),
-              //   ],
-              // ),
+              
               Column(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
@@ -115,28 +75,6 @@ class _AboutUsState extends State<AboutUs> {
       ),
     );
   }
-}
-
-Widget _aboutParagraph() {
-  return Column(
-    children: [
-      Container(
-        padding: EdgeInsets.symmetric(horizontal: kDefaultPadding * 6),
-        child: RichText(
-          text: TextSpan(
-            children: <TextSpan>[
-              TextSpan(
-                text: "About us\n".toUpperCase(),
-              ),
-              TextSpan(
-                text: "Vi är grupp 8.\n",
-              ),
-            ],
-          ),
-        ),
-      ),
-    ],
-  );
 }
 
 Widget logoutButton(context) {
@@ -169,8 +107,7 @@ Widget logoutButton(context) {
 
 Widget appVerText() {
   return Container(
-    //alignment: Alignment.bottomCenter,
-
+    
     child: Text(
       'Version: 0.1.5-alpha',
       style: TextStyle(fontSize: 12),

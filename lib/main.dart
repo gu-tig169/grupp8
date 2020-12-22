@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-// import 'package:provider/provider.dart';
-
-import 'welcome_view.dart';
+import 'views/welcome_view/welcome_view.dart';
 
 void main() {
   runApp(
@@ -20,8 +18,7 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
       theme: ThemeData(
         brightness: Brightness.dark,
-        //visualDensity: VisualDensity.adaptivePlatformDensity,
-      ),
+       ),
       home: HomePage(),
     );
   }
