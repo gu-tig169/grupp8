@@ -10,7 +10,6 @@ import 'package:auto_size_text/auto_size_text.dart';
 
 import '../home_view/home_screen_view.dart';
 
-
 class FullScreen extends StatefulWidget {
   final Photo photo;
   FullScreen(this.photo);
@@ -47,9 +46,9 @@ class _FullScreenState extends State<FullScreen> {
               Positioned.fill(
                 top: 13,
                 child: Align(
-                 alignment: Alignment.topCenter,
-                 child: _photographerName(),
-               ),
+                  alignment: Alignment.topCenter,
+                  child: _photographerName(),
+                ),
               ),
               Positioned.fill(
                 top: 40,
@@ -74,10 +73,11 @@ class _FullScreenState extends State<FullScreen> {
                 right: 20,
               ),
             ],
-          )),
+          ),
         ),
-      );
-   }
+      ),
+    );
+  }
 
 // The fullscreen photo display UI loaded from the url of the photo from the Unsplash API,
 // navigated to via the id of a hero animation tag.
@@ -123,18 +123,19 @@ class _FullScreenState extends State<FullScreen> {
 
 // Photographer name widget: calls the user (submitter) attribute from the Unsplash API.
 
- Widget _photographerName() {
-    return Padding(padding: 
-    EdgeInsets.only(
-      left: 50,
-      right: 50,
-    ),
-    child: AutoSizeText('Photo by ' + widget.photo.user,
-    maxLines: 1,
-    minFontSize: 13,
-    style: TextStyle(fontSize: 16),
-    overflow: TextOverflow.ellipsis,
-    ),
+  Widget _photographerName() {
+    return Padding(
+      padding: EdgeInsets.only(
+        left: 50,
+        right: 50,
+      ),
+      child: AutoSizeText(
+        'Photo by ' + widget.photo.user,
+        maxLines: 1,
+        minFontSize: 13,
+        style: TextStyle(fontSize: 16),
+        overflow: TextOverflow.ellipsis,
+      ),
     );
   }
 
@@ -143,23 +144,29 @@ class _FullScreenState extends State<FullScreen> {
 
   Widget _photoLocation() {
     if (widget.photo.city != null && widget.photo.country != null) {
-      return Text((widget.photo.city + ', ' + widget.photo.country),
-          style: TextStyle(
-            color: Colors.white,
-            fontSize: 15,
-          ));
+      return Text(
+        (widget.photo.city + ', ' + widget.photo.country),
+        style: TextStyle(
+          color: Colors.white,
+          fontSize: 15,
+        ),
+      );
     } else if (widget.photo.country != null) {
-      return Text((widget.photo.country),
-          style: TextStyle(
-            color: Colors.white,
-            fontSize: 15,
-          ));
+      return Text(
+        (widget.photo.country),
+        style: TextStyle(
+          color: Colors.white,
+          fontSize: 15,
+        ),
+      );
     } else if (widget.photo.city != null) {
-      return Text((widget.photo.country),
-          style: TextStyle(
-            color: Colors.white,
-            fontSize: 15,
-          ));
+      return Text(
+        (widget.photo.country),
+        style: TextStyle(
+          color: Colors.white,
+          fontSize: 15,
+        ),
+      );
     }
     return Text('');
   }
@@ -209,37 +216,37 @@ class _FullScreenState extends State<FullScreen> {
       ),
     );
   }
-    Future<bool> onLikeButtonTapped(bool isLiked) async {
+
+  Future<bool> onLikeButtonTapped(bool isLiked) async {
     return !isLiked;
   }
 }
 
 // Download icon (no feature).
 
-  Widget _saveButton() {
-    return ClipRRect(
-      borderRadius: BorderRadius.circular(70),
-      child: BackdropFilter(
-        filter: ImageFilter.blur(
-          sigmaX: 10.0,
-          sigmaY: 10.0,
-        ),
-        child: GestureDetector(
-          onTap: () {
-            print('test');
-          },
-          child: Container(
-            color: Color.fromARGB(125, 255, 255, 255),
-            width: 60,
-            height: 60,
-            child: Icon(
-              CupertinoIcons.arrow_down,
-              color: Colors.black,
-              size: 24,
-            ),
+Widget _saveButton() {
+  return ClipRRect(
+    borderRadius: BorderRadius.circular(70),
+    child: BackdropFilter(
+      filter: ImageFilter.blur(
+        sigmaX: 10.0,
+        sigmaY: 10.0,
+      ),
+      child: GestureDetector(
+        onTap: () {
+          print('test');
+        },
+        child: Container(
+          color: Color.fromARGB(125, 255, 255, 255),
+          width: 60,
+          height: 60,
+          child: Icon(
+            CupertinoIcons.arrow_down,
+            color: Colors.black,
+            size: 24,
           ),
         ),
       ),
-    );
-  }
-
+    ),
+  );
+}

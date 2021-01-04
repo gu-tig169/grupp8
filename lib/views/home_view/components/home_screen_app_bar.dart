@@ -125,15 +125,16 @@ class HomeScreenAppBar extends SliverPersistentHeaderDelegate {
 
   Widget _futureFeaturedPhotoBuilder(Future<Photo> featuredPhoto) {
     return FutureBuilder<Photo>(
-        future: featuredPhoto,
-        builder: (context, snapshot) {
-          if (snapshot.hasData) {
-            return _topImage(snapshot.data);
-          } else if (snapshot.hasError) {
-            return Text("${snapshot.error}");
-          }
-          return loadingIndicator();
-        });
+      future: featuredPhoto,
+      builder: (context, snapshot) {
+        if (snapshot.hasData) {
+          return _topImage(snapshot.data);
+        } else if (snapshot.hasError) {
+          return Text("${snapshot.error}");
+        }
+        return loadingIndicator();
+      },
+    );
   }
 
 // Design for the featured header/top image.
@@ -152,18 +153,15 @@ class HomeScreenAppBar extends SliverPersistentHeaderDelegate {
       child: Container(
         decoration: BoxDecoration(
           gradient: LinearGradient(
-              begin: Alignment.bottomCenter,
-              end: Alignment.center,
-              stops: [
-                0.05,
-                0.1,
-                0.3
-              ],
-              colors: [
-                Colors.black.withOpacity(0.3),
-                Colors.black.withOpacity(0.2),
-                Colors.black.withOpacity(0),
-              ]),
+            begin: Alignment.bottomCenter,
+            end: Alignment.center,
+            stops: [0.05, 0.1, 0.3],
+            colors: [
+              Colors.black.withOpacity(0.3),
+              Colors.black.withOpacity(0.2),
+              Colors.black.withOpacity(0),
+            ],
+          ),
         ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.end,
@@ -189,46 +187,48 @@ class HomeScreenAppBar extends SliverPersistentHeaderDelegate {
 
   Widget _searchImageTextField() {
     return Center(
-        child: Padding(
-            padding: const EdgeInsets.only(left: 15, right: 15),
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(10),
-              child: SizedBox(
-                height: 40,
-                width: double.infinity,
-                child: BackdropFilter(
-                  filter: ImageFilter.blur(
-                    sigmaX: 10.0,
-                    sigmaY: 10.0,
-                  ),
-                  child: CupertinoTextField(
-                    textInputAction: TextInputAction.search,
-                    onSubmitted: (value) {
-                      PhotoStore().resetPageCounter();
-                      PhotoStore().clearPhotoList();
-                      PhotoStore().callGetPhotos();
-                    },
-                    style: TextStyle(color: Colors.white),
-                    cursorColor: Colors.white,
-                    controller: imageSearch,
-                    prefix: Padding(
-                      padding: const EdgeInsets.only(left: 10),
-                      child: Icon(
-                        CupertinoIcons.search,
-                        color: Colors.white,
-                      ),
-                    ),
-                    placeholder: "Search photos",
-                    placeholderStyle: TextStyle(
-                      color: Colors.white,
-                    ),
-                    decoration: BoxDecoration(
-                      color: Color.fromARGB(100, 118, 118, 128),
-                    ),
+      child: Padding(
+        padding: const EdgeInsets.only(left: 15, right: 15),
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(10),
+          child: SizedBox(
+            height: 40,
+            width: double.infinity,
+            child: BackdropFilter(
+              filter: ImageFilter.blur(
+                sigmaX: 10.0,
+                sigmaY: 10.0,
+              ),
+              child: CupertinoTextField(
+                textInputAction: TextInputAction.search,
+                onSubmitted: (value) {
+                  PhotoStore().resetPageCounter();
+                  PhotoStore().clearPhotoList();
+                  PhotoStore().callGetPhotos();
+                },
+                style: TextStyle(color: Colors.white),
+                cursorColor: Colors.white,
+                controller: imageSearch,
+                prefix: Padding(
+                  padding: const EdgeInsets.only(left: 10),
+                  child: Icon(
+                    CupertinoIcons.search,
+                    color: Colors.white,
                   ),
                 ),
+                placeholder: "Search photos",
+                placeholderStyle: TextStyle(
+                  color: Colors.white,
+                ),
+                decoration: BoxDecoration(
+                  color: Color.fromARGB(100, 118, 118, 128),
+                ),
               ),
-            )));
+            ),
+          ),
+        ),
+      ),
+    );
   }
 
 // Logo widget.

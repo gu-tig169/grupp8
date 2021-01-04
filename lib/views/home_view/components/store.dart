@@ -30,12 +30,12 @@ class PhotoStore extends ChangeNotifier {
   }
 
   void callGetPhotos() {
-    GetPhotos()
-        .fetchPhotos(imageSearch.text, PhotoStore().pageCounter)
-        .then((value) => {
-              photoList.addAll(value),
-              isLoading = false,
-              notifyListeners(),
-            });
+    GetPhotos().fetchPhotos(imageSearch.text, PhotoStore().pageCounter).then(
+          (value) => {
+            photoList.addAll(value),
+            isLoading = false,
+            notifyListeners(),
+          },
+        );
   }
 }

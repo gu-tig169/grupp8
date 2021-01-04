@@ -18,7 +18,7 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
       theme: ThemeData(
         brightness: Brightness.dark,
-       ),
+      ),
       home: HomePage(),
     );
   }

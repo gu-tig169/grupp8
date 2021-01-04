@@ -1,6 +1,5 @@
 // Describes the photo class/object
 
-
 class Photo {
   String id;
   String altDescription;
@@ -18,7 +17,7 @@ class Photo {
     this.city,
   });
 
-// Parses photo location (country/city) labels from API with Json 
+// Parses photo location (country/city) labels from API with Json
 
   factory Photo.fromJson(Map<String, dynamic> json) {
     var locationCountry =
