@@ -31,7 +31,10 @@ Widget sliverLoaderIndicator() {
       (context, index) {
         return Column(
           children: <Widget>[
-            Container(width: double.infinity, child: loadingIndicator())
+            Container(
+              width: double.infinity,
+              child: loadingIndicator(),
+            ),
           ],
         );
       },

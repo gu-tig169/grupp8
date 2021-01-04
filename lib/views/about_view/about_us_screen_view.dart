@@ -31,55 +31,58 @@ class _AboutUsState extends State<AboutUs> {
               );
             },
           ),
-          title: Text("God Jul".toUpperCase()),
+          title: Text("about us".toUpperCase()),
           centerTitle: true,
         ),
-        body: Container(
-          width: MediaQuery.of(context).size.width * 1,
-          height: MediaQuery.of(context).size.height * 1,
-          decoration: BoxDecoration(
-            image: DecorationImage(
-                image: AssetImage("assets/images/pic_3.jpg"),
-                fit: BoxFit.cover),
-          ),
-          child: Stack(
-            alignment: Alignment.center,
+        body: _body(context, size),
+      ),
+    );
+  }
+
+  Container _body(BuildContext context, Size size) {
+    return Container(
+      width: MediaQuery.of(context).size.width * 1,
+      height: MediaQuery.of(context).size.height * 1,
+      decoration: BoxDecoration(
+        image: DecorationImage(
+            image: AssetImage("assets/images/about_us.jpg"), fit: BoxFit.cover),
+      ),
+      child: Stack(
+        alignment: Alignment.center,
+        children: [
+          Column(
+            mainAxisAlignment: MainAxisAlignment.end,
             children: [
-              Column(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  Container(
-                    height: size.height * 0.2,
-                    decoration: BoxDecoration(
-                      color: Colors.black.withOpacity(0.5),
-                      borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(18),
-                        topRight: Radius.circular(18),
-                      ),
+              Container(
+                height: size.height * 0.2,
+                width: size.width,
+                decoration: BoxDecoration(
+                  color: Colors.black.withOpacity(0.5),
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(18),
+                    topRight: Radius.circular(18),
+                  ),
+                ),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    _logoutButton(context),
+                    Padding(
+                      padding: EdgeInsets.symmetric(vertical: kDefaultPadding),
+                      child: _appVerText(),
                     ),
-                  ),
-                ],
-              ),
-              
-              Column(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  logoutButton(context),
-                  Padding(
-                    padding: EdgeInsets.symmetric(vertical: kDefaultPadding),
-                    child: appVerText(),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ],
           ),
-        ),
+        ],
       ),
     );
   }
 }
 
-Widget logoutButton(context) {
+Widget _logoutButton(context) {
   return Container(
     padding: EdgeInsets.symmetric(vertical: kDefaultPadding / 2),
     child: SizedBox(
@@ -107,11 +110,10 @@ Widget logoutButton(context) {
   );
 }
 
-Widget appVerText() {
+Widget _appVerText() {
   return Container(
-    
     child: Text(
-      'Version: 0.1.5-alpha',
+      'Version: 0.2.0',
       style: TextStyle(fontSize: 12),
     ),
   );

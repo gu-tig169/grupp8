@@ -36,7 +36,7 @@ class _HomePageState extends State<HomePage> {
       }
       setState(() {});
     });
-        focusNodePassword.addListener(() {
+    focusNodePassword.addListener(() {
       if (focusNodePassword.hasFocus) {
         hintTextPassword = '';
       } else {
@@ -61,68 +61,7 @@ class _HomePageState extends State<HomePage> {
                   parallaxEnabled: false,
                   body: _body(),
                   controller: _pc,
-                  panel: Center(
-                    child: Column(
-                      children: [
-                        SizedBox(
-                          height: 5.0,
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: <Widget>[
-                            Container(
-                              width: 40,
-                              height: 10,
-                              decoration: BoxDecoration(
-                                  color: Colors.white70,
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(12.0))),
-                            ),
-                          ],
-                        ),
-                        SizedBox(
-                          height: 35,
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Expanded(
-                              child: _userNameTextField(),
-                            ),
-                          ],
-                        ),
-                        SizedBox(
-                          height: 30,
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Expanded(
-                              child: _passwordTextField(),
-                            ),
-                          ],
-                        ),
-                        SizedBox(
-                          height: 30,
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            logInButtonSlider(context),
-                          ],
-                        ),
-                        SizedBox(
-                          height: 20,
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            resetPassword(),
-                          ],
-                        ),
-                      ],
-                    ),
-                  ),
+                  panel: _panel(),
                   borderRadius: BorderRadius.only(
                       topLeft: Radius.circular(18.0),
                       topRight: Radius.circular(18.0)),
@@ -152,22 +91,174 @@ class _HomePageState extends State<HomePage> {
             top: 75,
             child: Align(
               alignment: Alignment.topCenter,
-              child: logoImage(),
+              child: _logoImageBody(),
             ),
           ),
           Positioned.fill(
             bottom: 180,
             child: Align(
               alignment: Alignment.bottomCenter,
-              child: loginButtonBody(),
+              child: _loginButtonBody(),
             ),
           ),
           Positioned.fill(
             bottom: 125,
             child: Align(
               alignment: Alignment.bottomCenter,
-              child: registerButtonBody(),
+              child: _registerButtonBody(),
             ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _logoImageBody() {
+    return Text(
+      '''PLENTY 
+OF PICS''',
+      style: TextStyle(
+          shadows: <Shadow>[
+            Shadow(
+              offset: Offset(1.0, 1.0),
+              blurRadius: 3.0,
+              color: Color.fromARGB(255, 0, 0, 0),
+            )
+          ],
+          color: Color.fromARGB(255, 224, 234, 255),
+          fontSize: 48,
+          fontFamily: "Syncopate"),
+    );
+  }
+
+  Widget _loginButtonBody() {
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(10),
+      child: BackdropFilter(
+        filter: ImageFilter.blur(
+          sigmaX: 10.0,
+          sigmaY: 10.0,
+        ),
+        child: Container(
+          child: SizedBox(
+            width: 185,
+            height: 45,
+            child: RaisedButton(
+              elevation: 7.0,
+              textColor: Colors.white,
+              child: Text(
+                "Log in",
+                style: TextStyle(fontSize: 15, fontWeight: FontWeight.w600),
+              ),
+              color: Color.fromARGB(150, 59, 55, 55),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10),
+                side: BorderSide.none,
+              ),
+              onPressed: () => _pc.open(),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _registerButtonBody() {
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(10),
+      child: BackdropFilter(
+        filter: ImageFilter.blur(
+          sigmaX: 10.0,
+          sigmaY: 10.0,
+        ),
+        child: Container(
+          child: SizedBox(
+            width: 185,
+            height: 45,
+            child: FlatButton(
+              textColor: Colors.black,
+              child: Text(
+                "Register",
+                style: TextStyle(fontSize: 15, fontWeight: FontWeight.w600),
+              ),
+              color: Color.fromARGB(125, 255, 255, 255),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10),
+                side: BorderSide.none,
+              ),
+              onPressed: () async {
+                const url = 'https://unsplash.com/join';
+                if (await canLaunch(url)) {
+                  await launch(url, forceWebView: true);
+                } else {
+                  throw 'Could not launch $url';
+                }
+              },
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _panel() {
+    return Center(
+      child: Column(
+        children: [
+          SizedBox(
+            height: 5.0,
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Container(
+                width: 40,
+                height: 10,
+                decoration: BoxDecoration(
+                    color: Colors.white70,
+                    borderRadius: BorderRadius.all(Radius.circular(12.0))),
+              ),
+            ],
+          ),
+          SizedBox(
+            height: 35,
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Expanded(
+                child: _userNameTextField(),
+              ),
+            ],
+          ),
+          SizedBox(
+            height: 30,
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Expanded(
+                child: _passwordTextField(),
+              ),
+            ],
+          ),
+          SizedBox(
+            height: 30,
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              _logInButtonSlider(context),
+            ],
+          ),
+          SizedBox(
+            height: 20,
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              _resetPassword(),
+            ],
           ),
         ],
       ),
@@ -249,17 +340,19 @@ class _HomePageState extends State<HomePage> {
           ),
         ),
       ),
-      decoration: BoxDecoration(boxShadow: [
-        BoxShadow(
-          color: Colors.black45,
-          blurRadius: 7,
-          offset: const Offset(0, 5),
-        )
-      ]),
+      decoration: BoxDecoration(
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black45,
+            blurRadius: 7,
+            offset: const Offset(0, 5),
+          )
+        ],
+      ),
     );
   }
 
-  Widget logInButtonSlider(context) {
+  Widget _logInButtonSlider(context) {
     return Container(
       child: SizedBox(
         width: 150,
@@ -318,7 +411,7 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  Widget resetPassword() {
+  Widget _resetPassword() {
     return Container(
       child: TextButton(
         child: Text(
@@ -340,119 +433,32 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  Widget logoImage() {
-    return Text(
-      '''PLENTY 
-OF PICS''',
-      style: TextStyle(
-          shadows: <Shadow>[
-            Shadow(
-              offset: Offset(1.0, 1.0),
-              blurRadius: 3.0,
-              color: Color.fromARGB(255, 0, 0, 0),
-            )
-          ],
-          color: Color.fromARGB(255, 224, 234, 255),
-          fontSize: 48,
-          fontFamily: "Syncopate"),
-    );
-  }
-
-  Widget loginButtonBody() {
-    return ClipRRect(
-      borderRadius: BorderRadius.circular(10),
-      child: BackdropFilter(
-        filter: ImageFilter.blur(
-          sigmaX: 10.0,
-          sigmaY: 10.0,
-        ),
-        child: Container(
-          child: SizedBox(
-            width: 185,
-            height: 45,
-            child: RaisedButton(
-              elevation: 7.0,
-              textColor: Colors.white,
-              child: Text(
-                "Log in",
-                style: TextStyle(fontSize: 15, fontWeight: FontWeight.w600),
-              ),
-              color: Color.fromARGB(150, 59, 55, 55),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(10),
-                side: BorderSide.none,
-              ),
-              onPressed: () => _pc.open(),
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-
-  Widget registerButtonBody() {
-    return ClipRRect(
-      borderRadius: BorderRadius.circular(10),
-      child: BackdropFilter(
-        filter: ImageFilter.blur(
-          sigmaX: 10.0,
-          sigmaY: 10.0,
-        ),
-        child: Container(
-          child: SizedBox(
-            width: 185,
-            height: 45,
-            child: FlatButton(
-                textColor: Colors.black,
-                child: Text(
-                  "Register",
-                  style: TextStyle(fontSize: 15, fontWeight: FontWeight.w600),
-                ),
-                color: Color.fromARGB(125, 255, 255, 255),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10),
-                  side: BorderSide.none,
-                ),
-                onPressed: () async {
-                  const url = 'https://unsplash.com/join';
-                  if (await canLaunch(url)) {
-                    await launch(url, forceWebView: true);
-                  } else {
-                    throw 'Could not launch $url';
-                  }
-                }),
-          ),
-        ),
-      ),
-    );
-  }
-
-  Widget unsplashLogo() {
-    return Container(
-      width: 200,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
-          Text(
-            "Powered by ",
-            style: TextStyle(
-              fontSize: 12,
-              fontWeight: FontWeight.bold,
-              color: Colors.black,
-            ),
-          ),
-          SizedBox(
-            width: 37,
-          ),
-          Padding(
-            padding: const EdgeInsets.only(right: 6),
-            child: Container(
-              height: 14,
-              child: new Image.asset("assets/images/Unsplash_Logo_Full.png"),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
+  // Widget unsplashLogo() {
+  //   return Container(
+  //     width: 200,
+  //     child: Row(
+  //       mainAxisAlignment: MainAxisAlignment.center,
+  //       children: <Widget>[
+  //         Text(
+  //           "Powered by ",
+  //           style: TextStyle(
+  //             fontSize: 12,
+  //             fontWeight: FontWeight.bold,
+  //             color: Colors.black,
+  //           ),
+  //         ),
+  //         SizedBox(
+  //           width: 37,
+  //         ),
+  //         Padding(
+  //           padding: const EdgeInsets.only(right: 6),
+  //           child: Container(
+  //             height: 14,
+  //             child: new Image.asset("assets/images/Unsplash_Logo_Full.png"),
+  //           ),
+  //         ),
+  //       ],
+  //     ),
+  //   );
+  // }
 }
