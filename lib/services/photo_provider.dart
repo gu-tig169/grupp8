@@ -5,7 +5,7 @@ import 'package:http/http.dart' as http;
 
 import '../models/photo.dart';
 
-String apiKey = 'QM7rfeVBnVQKCSdSD2iL5yC8qt80lWstn6glQXqoFR0';
+String apiKey = 'Y_eztk9R60rYLH2HaYE3SD4B3jShJWKpxZY0D00tA1E';
 
 // This class provides photos from the Unsplash API based on the photo object
 // Get request for a random Featured Photo from Unsplash API 
