@@ -34,7 +34,7 @@ Widget slidingupPanel(context) {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Expanded(
-                child: userNameTextField(),
+                child: _userNameTextField(),
               ),
             ],
           ),
@@ -45,7 +45,7 @@ Widget slidingupPanel(context) {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Expanded(
-                child: passwordTextField(),
+                child: _passwordTextField(),
               ),
             ],
           ),
@@ -55,7 +55,7 @@ Widget slidingupPanel(context) {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              logInButtonSlider(context),
+              _logInButtonSlider(context),
             ],
           ),
           SizedBox(
@@ -64,7 +64,7 @@ Widget slidingupPanel(context) {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              resetPassword(),
+              _resetPassword(),
             ],
           ),
         ],
@@ -72,7 +72,7 @@ Widget slidingupPanel(context) {
     );
   }
 
-Widget userNameTextField() {
+Widget _userNameTextField() {
     return Container(
       margin: EdgeInsets.only(
         left: 60,
@@ -116,7 +116,7 @@ Widget userNameTextField() {
     );
   }
 
-  Widget passwordTextField() {
+  Widget _passwordTextField() {
     return Container(
       margin: EdgeInsets.only(
         left: 60,
@@ -159,7 +159,7 @@ Widget userNameTextField() {
     );
   }
 
-  Widget logInButtonSlider(context) {
+  Widget _logInButtonSlider(context) {
     return Container(
       child: SizedBox(
         width: 150,
@@ -218,7 +218,7 @@ Widget userNameTextField() {
     );
   }
 
-  Widget resetPassword() {
+  Widget _resetPassword() {
     return Container(
       child: TextButton(
         child: Text(
