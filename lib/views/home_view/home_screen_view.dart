@@ -105,8 +105,18 @@ class _HomeScreenState extends State<HomeScreen> {
                 child: GestureDetector(
                   child: Hero(
                     tag: PhotoStore().photoList[index].id,
-                    child:
-                        Image.network(PhotoStore().photoList[index].photoUrl),
+                    child: Image.network(PhotoStore().photoList[index].photoUrl,
+                    loadingBuilder: (BuildContext context, Widget child, ImageChunkEvent loadingProgress)
+                      {
+                        if (loadingProgress == null)
+                          return child;
+                        return Container(
+                          width: double.infinity,
+                          height: 500,
+                          child: loadingIndicator(),
+                        );
+                      },
+                    ),
                   ),
                   onTap: () {
                     Navigator.push(
