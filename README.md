@@ -10,6 +10,7 @@ Plenty of pics is a flutter app that allows the user to view photos and search p
 This is a third year school project by six students studying at Gothenburg University in Sweden.
 
 ## Code structure
+We have chosed to not break out all widgets in their own .dart files but instead only the more complex ones. Such as our custom sliver appbar and loader indicators. Our reason to this decision is because we have a lot of small widgets such as text fields and buttons that only are used in their own view.
 
 ### Top level
     .
@@ -33,8 +34,7 @@ This is a third year school project by six students studying at Gothenburg Unive
     │   ├── services            # API-service
     │   ├── views               # all different views that exsists in our app and their included components
     └── ...
-   
-We have chosed to not break out all widgets in their own .dart files but instead only the more complex ones. Such as our custom sliver appbar and loader indicators. Our reason to this decision is because we have a lot of small widgets such as text fields and buttons that only are used in their own view. 
+    
 
 ## Contributors
 
