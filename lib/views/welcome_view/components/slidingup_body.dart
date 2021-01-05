@@ -79,7 +79,7 @@ OF PICS''',
               elevation: 7.0,
               textColor: Colors.white,
               child: Text(
-                "Don't Log in",
+                "Log in",
                 style: TextStyle(fontSize: 15, fontWeight: FontWeight.w600),
               ),
               color: Color.fromARGB(150, 59, 55, 55),
