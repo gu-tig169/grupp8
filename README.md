@@ -9,6 +9,33 @@ Plenty of pics is a flutter app that allows the user to view photos and search p
 
 This is a third year school project by six students studying at Gothenburg University in Sweden.
 
+## Code structure
+We have chosen not to break out all widgets in their own .dart files but instead only the more complex ones, such as the custom sliver appbar and loader indicators. Our reasoning for this decision is because we have a lot of small graphical widgets such as text fields and buttons that only are used in their own view.
+
+### Top level
+    .
+    ├── assets                  # external files that are used in the app
+    ├── lib                     # source files
+    └── README.md
+    
+#### /Assets
+    .
+    ├── ...
+    ├── assets                  # external files that are used in the app
+    │   ├── fonts               # font files
+    │   ├── images              # image files
+    └── ...
+    
+#### /Lib
+    .
+    ├── ...
+    ├── lib                     # source files
+    │   ├── models              # general constants, classes that are used more than once in our app
+    │   ├── services            # API-service
+    │   ├── views               # all different views that exsists in our app and their included components
+    └── ...
+    
+
 ## Contributors
 
 Thanks to the following people who have contributed to this project:
