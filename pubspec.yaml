@@ -38,6 +38,7 @@ dependencies:
   cached_network_image: ^2.4.1
   photo_view: ^0.10.3
   auto_size_text: ^2.1.0
+  fluttertoast: ^7.1.6
 
 dev_dependencies:
   flutter_test:

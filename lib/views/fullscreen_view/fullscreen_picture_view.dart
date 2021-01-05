@@ -7,6 +7,7 @@ import 'package:grupp_8/models/photo.dart';
 import 'package:photo_view/photo_view.dart';
 import 'package:like_button/like_button.dart';
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 import '../home_view/home_screen_view.dart';
 
@@ -175,7 +176,15 @@ class _FullScreenState extends State<FullScreen> {
 
   Widget _shareButton() {
     return GestureDetector(
-      onTap: () {},
+      onTap: () {
+        Fluttertoast.showToast(
+            msg: "Work in progress",
+            toastLength: Toast.LENGTH_SHORT,
+            gravity: ToastGravity.CENTER,
+            backgroundColor: Colors.black,
+            fontSize: 16.0, 
+            );
+      },
       child: Icon(
         CupertinoIcons.square_arrow_up,
         color: Colors.white,
@@ -234,7 +243,13 @@ Widget _saveButton() {
       ),
       child: GestureDetector(
         onTap: () {
-          print('test');
+          Fluttertoast.showToast(
+            msg: "Work in progress",
+            toastLength: Toast.LENGTH_SHORT,
+            gravity: ToastGravity.CENTER,
+            backgroundColor: Colors.black,
+            fontSize: 16.0, 
+            );
         },
         child: Container(
           color: Color.fromARGB(125, 255, 255, 255),
