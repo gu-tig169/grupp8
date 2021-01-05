@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:grupp_8/views/home_view/home_screen_view.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-// Widgets for sliding up panel and animation.
+// Sliding up panel content elements.
 
 Widget slidingupPanel(context) {
     return Center(
@@ -71,6 +71,8 @@ Widget slidingupPanel(context) {
       ),
     );
   }
+
+// Widgets for sliding up panel.
 
 Widget _userNameTextField() {
     return Container(

@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-// widgets relating to sliding up panel body.
+// widgets relating to sliding up panel body elements.
 
 Widget slidingupBody(context) {
     return Container(
