@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 import 'package:grupp_8/models/photo.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 import 'loader_indicators.dart';
 import 'store.dart';
@@ -104,7 +105,15 @@ class HomeScreenAppBar extends SliverPersistentHeaderDelegate {
             alignment: Alignment.topRight,
             child: IconButton(
               icon: Icon(Icons.person, color: Colors.white),
-              onPressed: () {},
+              onPressed: () {
+                Fluttertoast.showToast(
+            msg: "Work in progress",
+            toastLength: Toast.LENGTH_SHORT,
+            gravity: ToastGravity.CENTER,
+            backgroundColor: Colors.black,
+            fontSize: 16.0, 
+            );
+              },
             ),
           ),
         ),
