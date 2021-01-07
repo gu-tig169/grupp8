@@ -9,7 +9,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'loader_indicators.dart';
 import '../../../services/store.dart';
 
-import '../../about_view/about_us_screen_view.dart';
+import '../../about_view/about_us_screen_index.dart';
 
 // Custom made app bar for text input search field & featured image to facilitate scroll fade using slivers.
 // Inherits from sliver delegate to build below design according to Sliver constraints.
