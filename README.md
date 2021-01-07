@@ -4,6 +4,7 @@
 ![GitHub repo size](https://img.shields.io/github/repo-size/gu-tig169/grupp8)
 ![GitHub stars](https://img.shields.io/github/stars/gu-tig169/grupp8)
 ![GitHub issues](https://img.shields.io/github/issues/gu-tig169/grupp8)
+![Github license](https://img.shields.io/github/license/gu-tig169/grupp8)
 
 Plenty of pics is a flutter app that allows the user to view photos and search photos via the unsplash API.
 
