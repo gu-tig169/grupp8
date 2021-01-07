@@ -9,7 +9,7 @@ import 'components/home_screen_app_bar.dart';
 import '../../services/store.dart';
 import 'components/loader_indicators.dart';
 
-import '../fullscreen_view/fullscreen_picture_view.dart';
+import '../fullscreen_view/fullscreen_picture_index.dart';
 
 class HomeScreen extends StatefulWidget {
   @override

@@ -9,7 +9,7 @@ import 'package:like_button/like_button.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
-import '../home_view/home_screen_view.dart';
+import '../home_view/home_screen_index.dart';
 
 class FullScreen extends StatefulWidget {
   final Photo photo;

@@ -4,10 +4,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 import 'package:keyboard_avoider/keyboard_avoider.dart';
-
 import 'components/slidingup_panel.dart';
 import 'components/slidingup_body.dart';
-import 'components/variables.dart';
 
 // Class and builder for welcome view.
 
