@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:grupp_8/views/home_view/home_screen_view.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-// Widgets for sliding up panel and animation.
+// Sliding up panel content elements.
 
 Widget slidingupPanel(context) {
     return Center(
@@ -34,7 +34,7 @@ Widget slidingupPanel(context) {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Expanded(
-                child: userNameTextField(),
+                child: _userNameTextField(),
               ),
             ],
           ),
@@ -45,7 +45,7 @@ Widget slidingupPanel(context) {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Expanded(
-                child: passwordTextField(),
+                child: _passwordTextField(),
               ),
             ],
           ),
@@ -55,7 +55,7 @@ Widget slidingupPanel(context) {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              logInButtonSlider(context),
+              _logInButtonSlider(context),
             ],
           ),
           SizedBox(
@@ -64,7 +64,7 @@ Widget slidingupPanel(context) {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              resetPassword(),
+              _resetPassword(),
             ],
           ),
         ],
@@ -72,7 +72,9 @@ Widget slidingupPanel(context) {
     );
   }
 
-Widget userNameTextField() {
+// Widgets for sliding up panel.
+
+Widget _userNameTextField() {
     return Container(
       margin: EdgeInsets.only(
         left: 60,
@@ -116,7 +118,7 @@ Widget userNameTextField() {
     );
   }
 
-  Widget passwordTextField() {
+  Widget _passwordTextField() {
     return Container(
       margin: EdgeInsets.only(
         left: 60,
@@ -159,7 +161,7 @@ Widget userNameTextField() {
     );
   }
 
-  Widget logInButtonSlider(context) {
+  Widget _logInButtonSlider(context) {
     return Container(
       child: SizedBox(
         width: 150,
@@ -218,7 +220,7 @@ Widget userNameTextField() {
     );
   }
 
-  Widget resetPassword() {
+  Widget _resetPassword() {
     return Container(
       child: TextButton(
         child: Text(

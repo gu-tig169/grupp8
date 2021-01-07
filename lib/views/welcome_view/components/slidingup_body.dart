@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-// widgets relating to sliding up panel body.
+// widgets relating to sliding up panel body elements.
 
 Widget slidingupBody(context) {
     return Container(
@@ -23,21 +23,21 @@ Widget slidingupBody(context) {
             top: 75,
             child: Align(
               alignment: Alignment.topCenter,
-              child: logoImageBody(),
+              child: _logoImageBody(),
             ),
           ),
           Positioned.fill(
             bottom: 180,
             child: Align(
               alignment: Alignment.bottomCenter,
-              child: loginButtonBody(),
+              child: _loginButtonBody(),
             ),
           ),
           Positioned.fill(
             bottom: 125,
             child: Align(
               alignment: Alignment.bottomCenter,
-              child: registerButtonBody(),
+              child: _registerButtonBody(),
             ),
           ),
         ],
@@ -45,7 +45,7 @@ Widget slidingupBody(context) {
     );
   }
 
-  Widget logoImageBody() {
+  Widget _logoImageBody() {
     return Text(
       '''PLENTY 
 OF PICS''',
@@ -63,7 +63,7 @@ OF PICS''',
     );
   }
 
-  Widget loginButtonBody() {
+  Widget _loginButtonBody() {
     return ClipRRect(
       borderRadius: BorderRadius.circular(10),
       child: BackdropFilter(
@@ -95,7 +95,7 @@ OF PICS''',
     );
   }
 
-  Widget registerButtonBody() {
+  Widget _registerButtonBody() {
     return ClipRRect(
       borderRadius: BorderRadius.circular(10),
       child: BackdropFilter(
