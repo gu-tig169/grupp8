@@ -1,9 +1,10 @@
 import 'dart:ui';
-import 'variables.dart';
-
+import 'package:sliding_up_panel/sliding_up_panel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:url_launcher/url_launcher.dart';
+
+PanelController pc = new PanelController();
 
 // widgets relating to sliding up panel body elements.
 

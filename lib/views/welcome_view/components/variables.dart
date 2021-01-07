@@ -3,7 +3,7 @@ import 'package:sliding_up_panel/sliding_up_panel.dart';
 
 // Variables for slidingup panel
 
-PanelController pc = new PanelController();
+
 FocusNode focusNodeUsername = FocusNode();
 String hintTextUsername = 'Username';
 

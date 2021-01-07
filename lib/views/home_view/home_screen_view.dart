@@ -6,7 +6,7 @@ import 'package:grupp_8/services/photo_provider.dart';
 import 'package:flutter/cupertino.dart';
 
 import 'components/home_screen_app_bar.dart';
-import 'components/store.dart';
+import '../../services/store.dart';
 import 'components/loader_indicators.dart';
 
 import '../fullscreen_view/fullscreen_picture_view.dart';

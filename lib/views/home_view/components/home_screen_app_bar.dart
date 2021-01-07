@@ -7,7 +7,7 @@ import 'package:grupp_8/models/photo.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 import 'loader_indicators.dart';
-import 'store.dart';
+import '../../../services/store.dart';
 
 import '../../about_view/about_us_screen_view.dart';
 
