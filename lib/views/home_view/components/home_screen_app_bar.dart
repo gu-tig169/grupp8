@@ -107,7 +107,7 @@ class HomeScreenAppBar extends SliverPersistentHeaderDelegate {
               icon: Icon(Icons.person, color: Colors.white),
               onPressed: () {
                 Fluttertoast.showToast(
-                  msg: "Work in progress",
+                  msg: "Your profile is not avalible right now",
                   toastLength: Toast.LENGTH_SHORT,
                   gravity: ToastGravity.CENTER,
                   backgroundColor: Colors.black,

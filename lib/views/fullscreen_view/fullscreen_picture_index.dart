@@ -178,7 +178,7 @@ class _FullScreenState extends State<FullScreen> {
     return GestureDetector(
       onTap: () {
         Fluttertoast.showToast(
-          msg: "Work in progress",
+          msg: '''Can't share pictures right now''',
           toastLength: Toast.LENGTH_SHORT,
           gravity: ToastGravity.CENTER,
           backgroundColor: Colors.black,
@@ -244,7 +244,7 @@ Widget _saveButton() {
       child: GestureDetector(
         onTap: () {
           Fluttertoast.showToast(
-            msg: "Work in progress",
+            msg: "Can't save pictures right now",
             toastLength: Toast.LENGTH_SHORT,
             gravity: ToastGravity.CENTER,
             backgroundColor: Colors.black,
