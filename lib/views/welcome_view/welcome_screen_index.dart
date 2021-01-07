@@ -7,7 +7,6 @@ import 'package:keyboard_avoider/keyboard_avoider.dart';
 
 import 'components/slidingup_panel.dart';
 import 'components/slidingup_body.dart';
-import 'components/variables.dart';
 
 // Class and builder for welcome view.
 
@@ -68,4 +67,4 @@ class _HomePageState extends State<HomePage> {
       ),
     );
   }
-} 
+}
