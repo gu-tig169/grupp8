@@ -31,7 +31,7 @@ class _AboutUsState extends State<AboutUs> {
               );
             },
           ),
-          title: Text("about us".toUpperCase()),
+          title: Text("".toUpperCase()),
           centerTitle: true,
         ),
         body: _body(context, size),
@@ -45,11 +45,87 @@ class _AboutUsState extends State<AboutUs> {
       height: MediaQuery.of(context).size.height * 1,
       decoration: BoxDecoration(
         image: DecorationImage(
-            image: AssetImage("assets/images/about_us.jpg"), fit: BoxFit.cover),
+            image: AssetImage("assets/images/about_us.png"), fit: BoxFit.cover),
       ),
       child: Stack(
         alignment: Alignment.center,
         children: [
+          Column(
+            children: [
+              Padding(
+                padding: EdgeInsets.only(top: 175),
+                child: Container(
+                  //color: Colors.black.withOpacity(0.2),
+                  alignment: Alignment.center,
+                  child: Text(
+                    'Hi! Thanks for using our flutter app.',
+                    style: TextStyle(
+                        color: Colors.grey[850],
+                        fontWeight: FontWeight.bold,
+                        fontSize: 16),
+                  ),
+                ),
+              ),
+              Divider(
+                height: 25,
+              ),
+              Padding(
+                padding: const EdgeInsets.only(left: 35, right: 35),
+                child: Container(
+                  alignment: Alignment.center,
+                  child: Text(
+                    'This app was developed during a school project by six 3rd year students at Gothenburg University.',
+                    style: TextStyle(
+                        color: Colors.black54, fontWeight: FontWeight.w600),
+                  ),
+                ),
+              ),
+              Divider(),
+              Container(
+                alignment: Alignment.center,
+                child: Text(
+                  'Our app is powered by Unsplash API.',
+                  style: TextStyle(
+                      color: Colors.black54, fontWeight: FontWeight.w600),
+                ),
+              ),
+              Divider(
+                height: 40,
+              ),
+              Padding(
+                padding: const EdgeInsets.only(left: 35, right: 35),
+                child: Container(
+                  alignment: Alignment.center,
+                  child: Text(
+                    'Developers:',
+                    style: TextStyle(
+                        color: Colors.grey[800], fontWeight: FontWeight.bold),
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+              ),
+              Divider(),
+              Padding(
+                padding: const EdgeInsets.only(left: 35, right: 35),
+                child: Container(
+                  alignment: Alignment.center,
+                  child: Text(
+                    'Andreas Åsén \nEmil Engberg Svensson \nErik Frisenstam \nIsabelle Schafhauser \nCarl Engman \nEvelina Bragsjö',
+                    style: TextStyle(
+                        color: Colors.black54, fontWeight: FontWeight.w600),
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+              ),
+              Divider(
+                height: 40,
+              ),
+              Container(
+                height: 35,
+                child: new Image.asset("assets/images/Unsplash_Logo_Full.png"),
+              ),
+            ],
+          ),
           Column(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
@@ -113,7 +189,7 @@ Widget _logoutButton(context) {
 Widget _appVerText() {
   return Container(
     child: Text(
-      'Version: 0.2.0',
+      'Version: 1.0.0',
       style: TextStyle(fontSize: 12),
     ),
   );
