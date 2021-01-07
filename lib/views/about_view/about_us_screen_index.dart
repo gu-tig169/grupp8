@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:grupp_8/models/constants.dart';
 
-import '../welcome_view/welcome_view.dart';
-import '../home_view/home_screen_view.dart';
+import '../welcome_view/welcome_screen_index.dart';
+import '../home_view/home_screen_index.dart';
 
 // (Currently) UI for the About Us page.
 
