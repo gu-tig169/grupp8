@@ -6,7 +6,7 @@ import 'package:grupp_8/services/photo_provider.dart';
 import 'package:flutter/cupertino.dart';
 
 import 'components/home_screen_app_bar.dart';
-import 'components/store.dart';
+import '../../services/store.dart';
 import 'components/loader_indicators.dart';
 
 import '../fullscreen_view/fullscreen_picture_view.dart';
@@ -51,7 +51,7 @@ class _HomeScreenState extends State<HomeScreen> {
     super.dispose();
   }
 
-// Design for the home screen view. 
+// Design for the home screen view.
 
   @override
   Widget build(BuildContext context) {
@@ -105,14 +105,14 @@ class _HomeScreenState extends State<HomeScreen> {
                 child: GestureDetector(
                   child: Hero(
                     tag: PhotoStore().photoList[index].id,
-                    child: Image.network(PhotoStore().photoList[index].photoUrl,
-                    loadingBuilder: (BuildContext context, Widget child, ImageChunkEvent loadingProgress)
-                      {
-                        if (loadingProgress == null)
-                          return child;
+                    child: Image.network(
+                      PhotoStore().photoList[index].photoUrl,
+                      loadingBuilder: (BuildContext context, Widget child,
+                          ImageChunkEvent loadingProgress) {
+                        if (loadingProgress == null) return child;
                         return Container(
                           width: double.infinity,
-                          height: 500,
+                          height: 50,
                           child: loadingIndicator(),
                         );
                       },
