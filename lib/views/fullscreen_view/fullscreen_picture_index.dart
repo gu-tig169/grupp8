@@ -203,23 +203,20 @@ class _FullScreenState extends State<FullScreen> {
           sigmaX: 10.0,
           sigmaY: 10.0,
         ),
-        child: GestureDetector(
-          onTap: () {},
-          child: Container(
-            color: Color.fromARGB(150, 59, 55, 55),
-            width: 60,
-            height: 60,
-            child: LikeButton(
-              padding: EdgeInsets.only(left: 4),
-              onTap: onLikeButtonTapped,
-              likeBuilder: (bool isLiked) {
-                return Icon(
-                  Icons.favorite_sharp,
-                  color: isLiked ? Colors.redAccent : Colors.white,
-                  size: 24,
-                );
-              },
-            ),
+        child: Container(
+          color: Color.fromARGB(150, 59, 55, 55),
+          width: 60,
+          height: 60,
+          child: LikeButton(
+            padding: EdgeInsets.only(left: 4),
+            onTap: onLikeButtonTapped,
+            likeBuilder: (bool isLiked) {
+              return Icon(
+                Icons.favorite_sharp,
+                color: isLiked ? Colors.redAccent : Colors.white,
+                size: 24,
+              );
+            },
           ),
         ),
       ),
