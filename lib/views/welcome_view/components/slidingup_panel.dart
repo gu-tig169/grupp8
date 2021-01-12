@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:grupp_8/services/store.dart';
 import 'package:grupp_8/views/home_view/home_screen_index.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -189,6 +190,7 @@ Widget _logInButtonSlider(context) {
           ),
         ),
         onPressed: () {
+          PhotoStore().clearPhotoList();
           if (usernameInput.text != '' &&
               usernameInput.text != null &&
               passwordInput.text != '' &&
@@ -197,6 +199,8 @@ Widget _logInButtonSlider(context) {
               context,
               MaterialPageRoute(builder: (context) => (HomeScreen())),
             );
+            usernameInput.clear();
+            passwordInput.clear();
           } else
             showDialog(
               context: context,

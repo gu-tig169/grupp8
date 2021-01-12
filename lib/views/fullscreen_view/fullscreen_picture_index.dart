@@ -162,7 +162,7 @@ class _FullScreenState extends State<FullScreen> {
       );
     } else if (widget.photo.city != null) {
       return Text(
-        (widget.photo.country),
+        (widget.photo.city),
         style: TextStyle(
           color: Colors.white,
           fontSize: 15,
