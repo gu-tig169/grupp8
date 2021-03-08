@@ -43,6 +43,8 @@ We have chosen not to break out all widgets in their own .dart files but instead
     │   ├── views               # all different views that exsists in our app and their included components
     └── ...
     
+## App screenshots
+![Snapshots from our app](https://i.imgur.com/bkfZvgQ.png)
 
 ## Contributors
 
